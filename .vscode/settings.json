@@ -1,5 +1,28 @@
 {
     "emmet.includeLanguages": {
         "javascript": "javascriptreact"
+    },
+    "todo-tree.general.tags": [
+        "BUG",
+        "FIXME",
+        "TODO",
+        "CONSIDER",
+        "IMPORTANT",
+    ],
+    "todo-tree.highlights.defaultHighlight": {
+        "background": "transparent",
+    },
+    "todo-tree.highlights.customHighlight": {
+        "CONSIDER": {
+            "icon": "question",
+            "foreground": "yellow",
+        },
+        "FIXME": {
+            "foreground": "green",
+        },
+        "IMPORTANT": {
+            "icon": "issue-opened",
+            "foreground": "red",
+        }
     }
 }
