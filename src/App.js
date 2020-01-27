@@ -19,6 +19,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <footer className="App__footer">
+        <a href="https://icons8.com/icon/W71PIW3yxyeJ/roulette">Roulette icon by Icons8</a>
+      </footer>
     </div>
   );
 }
