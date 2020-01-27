@@ -1,0 +1,11 @@
+.App__header {
+  height: 80px;
+}
+
+.App__main {
+  min-height: calc(100vh - 80px);
+}
+
+.App__footer {
+  height: 80px;
+}
