@@ -1,11 +1,15 @@
 .App__header {
   height: 80px;
+  background-color: #7b181b;
+  color: #fff;
 }
 
 .App__main {
   min-height: calc(100vh - 80px);
+  background-color: #ECEDF2;
 }
 
 .App__footer {
   height: 80px;
+  color: #7b181b;
 }
