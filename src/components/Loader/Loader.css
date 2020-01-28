@@ -1,5 +1,5 @@
   .loader__spinner {
-    background: url('/favicon.png') no-repeat center center;
+    background: url('/logo.png') no-repeat center center;
     background-size: contain;
     margin:auto;
     width: 80px;
