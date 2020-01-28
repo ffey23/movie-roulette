@@ -1,0 +1,23 @@
+  .loader__spinner {
+    background: url('/favicon.png') no-repeat center center;
+    background-size: contain;
+    margin:auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+    margin-bottom: 15px;
+  }
+
+  .loader__message {
+    text-align: center;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
