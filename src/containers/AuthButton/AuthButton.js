@@ -30,8 +30,9 @@ class AuthButtonWrapper extends Component {
         startLoading('Loging out...');
         logout().catch(err => {
             console.error(err);
+        }).finally(() => {
+            finishLoading();
         });
-        finishLoading();
     }
 }
 
