@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
 import MainLoader from './containers/MainLoader/MainLoader';
+import AuthButton from './containers/AuthButton/AuthButton';
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
         <header className="App__header">
+            <AuthButton />
         </header>
         <main className="App__main">
           <MainLoader/>
