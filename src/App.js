@@ -8,8 +8,10 @@ import './App.css';
 import Home from './pages/Home';
 import MainLoader from './containers/MainLoader/MainLoader';
 import AuthButton from './containers/AuthButton/AuthButton';
+import { syncReduxWithLocalStorage } from './utilities/auth';
 
 const App = () => {
+    syncReduxWithLocalStorage();
     return (
       <Router>
       <div className="App">
