@@ -1,4 +1,4 @@
-import {START_LOADING, FINISH_LOADING} from './actions';
+import {START_LOADING, FINISH_LOADING, LOGIN, LOGOUT} from './actions';
 
 const loading = (state = {
     loading: false,
@@ -19,6 +19,27 @@ const loading = (state = {
     }
 }
 
+const auth = (state = {
+    loggedIn: false,
+    sessionId: null,
+}, action) => {
+    switch(action.type) {
+        case LOGIN:
+            return {
+                loggedIn: true,
+                sessionId: action.payload,
+            };
+        case LOGOUT:
+            return {
+                loggedIn: false,
+                sessionId: null,
+            };
+        default:
+            return state;
+    }
+}
+
 export {
     loading,
+    auth,
 }

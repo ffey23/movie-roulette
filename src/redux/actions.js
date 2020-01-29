@@ -1,6 +1,10 @@
 const START_LOADING = 'START_LOADING';
 const FINISH_LOADING = 'FINISH_LOADING';
+const LOGIN = "LOGIN";
+const LOGOUT = "LOGOUT";
 export {
     START_LOADING,
     FINISH_LOADING,
+    LOGIN,
+    LOGOUT,
 }
