@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { Redirect } from 'react-router-dom'
 import Button from '../../components/Button/Button';
 import {createRequestToken, logout} from '../../utilities/auth';
 import { startLoading, finishLoading } from '../../redux/actions-creators';
 
 class AuthButtonWrapper extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            navigate: null
+        };
+      }
     render() {
+        const { navigate } = this.state;
         const {text, loggedIn} = this.props;
         return (
-            <Button text={text} onClick={loggedIn ? this.logOut.bind(this) : this.logIn.bind(this)}/>
+            <div className="auth__button">
+                {
+                    navigate && <Redirect to={`${navigate}`} push={true} />
+                }
+                <Button text={text} onClick={loggedIn ? this.logOut.bind(this) : this.logIn.bind(this)}/>
+            </div>
         );
     }
+
     /**
      * After we catch error we need to redirect user to movieDB authorization page
      * Look for REACT_APP_LOGIN_REDIRECT variable in .env files to see where you will be redirected when authorized
@@ -32,6 +46,9 @@ class AuthButtonWrapper extends Component {
             console.error(err);
         }).finally(() => {
             finishLoading();
+            this.setState({
+                navigate: '/',
+            })
         });
     }
 }
