@@ -70,8 +70,15 @@ const logout = () => {
     return deleteSession().then(() => displaySuccess('You have logged out!'))
 }
 
+const syncReduxWithLocalStorage = () => {
+    if (!store.getState().loggedIn && window.localStorage.getItem('session_id')) {
+        store.dispatch(loginAC(window.localStorage.getItem('session_id')));
+    }
+}
+
 export {
     login,
     logout,
-    createRequestToken
+    createRequestToken,
+    syncReduxWithLocalStorage,
 }
