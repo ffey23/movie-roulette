@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import store from '../redux/store';
 import { login } from '../utilities/auth';
 import { startLoading, finishLoading} from '../redux/actions-creators';
+import { Redirect } from 'react-router-dom';
 
 const Home = ({location}) => {
        
+    const [navigation, setNavigation] = useState(null);
     const requestToken = window.localStorage.getItem('request_token');
 
     /**
@@ -22,13 +24,18 @@ const Home = ({location}) => {
         ) 
         .finally(() => {
             store.dispatch(finishLoading());
+            setNavigation('/')
         })
     }
 
     return (
-        <div className="home">I am home</div>
+        <div className="home">I am home
+            {
+                navigation && <Redirect to={navigation} />
+            }
+        </div>
     )
-    }
+}
 
 
 export default Home;
