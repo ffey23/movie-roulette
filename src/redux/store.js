@@ -1,10 +1,16 @@
-import {combineReducers, createStore} from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import {combineReducers, createStore, applyMiddleware, compose} from 'redux';
 import * as reducers from './reducers';
 
 const movieRoulette = combineReducers(reducers)
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
     movieRoulette,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    composeEnhancers(
+        applyMiddleware(
+            thunkMiddleware,
+        )
+    )
 );
 export default store;
