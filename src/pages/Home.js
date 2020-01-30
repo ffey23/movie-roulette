@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import store from '../redux/store';
+import { connect } from 'react-redux'
 import { login } from '../utilities/auth';
 import { startLoading, finishLoading} from '../redux/loading/actions';
 import { Redirect } from 'react-router-dom';
 
-const Home = ({location}) => {
+const Home = ({location, fetchingTokenStart, fetchingTokenFinish }) => {
        
     const [navigation, setNavigation] = useState(null);
     const requestToken = window.localStorage.getItem('request_token');
@@ -16,14 +16,14 @@ const Home = ({location}) => {
     if(requestToken && location.search) {
         window.localStorage.removeItem('request_token');
 
-        store.dispatch(startLoading(true, 'Fetching access token'));
+        fetchingTokenStart();
 
         login(requestToken)
         .catch(
             err => console.log(err)
         ) 
         .finally(() => {
-            store.dispatch(finishLoading());
+            fetchingTokenFinish();
             setNavigation('/')
         })
     }
@@ -37,5 +37,16 @@ const Home = ({location}) => {
     )
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+      fetchingTokenStart: () => dispatch(startLoading(true, 'Fetching access token')),
+      fetchingTokenFinish: () => dispatch(finishLoading()),
+    }
+  }
+  
+  const HomeConnected = connect(
+      null,
+      mapDispatchToProps,
+  )(Home);
 
-export default Home;
+export default HomeConnected;
