@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import store from '../redux/store';
 import { login } from '../utilities/auth';
-import { startLoading, finishLoading} from '../redux/actions-creators';
+import { startLoading, finishLoading} from '../redux/loading/actions';
 import { Redirect } from 'react-router-dom';
 
 const Home = ({location}) => {

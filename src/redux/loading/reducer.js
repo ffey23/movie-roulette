@@ -1,4 +1,4 @@
-import {START_LOADING, FINISH_LOADING } from '../actions';
+import {START_LOADING, FINISH_LOADING } from './actions';
 
 const loading = (state = {
     loading: false,

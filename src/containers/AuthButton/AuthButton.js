@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import Button from '../../components/Button/Button';
 import {createRequestToken, logout} from '../../utilities/auth';
-import { startLoading, finishLoading } from '../../redux/actions-creators';
+import { startLoading, finishLoading } from '../../redux/loading/actions';
 
 class AuthButtonWrapper extends Component {
     constructor(props) {

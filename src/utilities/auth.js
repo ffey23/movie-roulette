@@ -1,7 +1,7 @@
 import store from '../redux/store';
 import api from '../services/api';
 import Swal from 'sweetalert2';
-import {login as loginAC, logout as logoutAC} from '../redux/actions-creators';
+import {login as loginAC, logout as logoutAC} from '../redux/auth/actions';
 
 const fetchRequestToken = () => {
     return api.auth.create_request_token();
