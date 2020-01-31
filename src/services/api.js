@@ -4,7 +4,11 @@ import axiosV4 from '../utilities/axios/axios-v4';
 export default {
     fixtures: {
         get_genres() {
-            return axiosV3.get('genre/movie/list')
+            return axiosV3.get('genre/movie/list', {
+                params: {
+                    api_key: process.env.REACT_APP_API_KEY
+        }
+            })
         }
     },
     auth: {
