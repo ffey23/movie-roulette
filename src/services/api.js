@@ -42,5 +42,18 @@ export default {
                 params: {api_key: process.env.REACT_APP_API_KEY}
             });
         },
+    },
+    movies: {
+        get_popular(params) {
+            // BUG: 
+            // on API: in the time of writing code API returns movie with id 522212 on 5th and on 13th
+            // we get duplicate api keys because of that in our view
+            return axiosV3.get('movie/popular', {
+                params: {
+                    ...params,
+                    api_key: process.env.REACT_APP_API_KEY
+                }
+            });
+        }
     }
 };
