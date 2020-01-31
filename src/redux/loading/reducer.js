@@ -2,8 +2,16 @@ import {START_LOADING, FINISH_LOADING } from './actions';
 
 const loading = (state = {
     loading: false,
-    message: 'Loading...',
+    /**
+     * Variable responsible for showing main loader that blocks every action
+     * you would like to do on the screen
+     */
     mainLoader: false,
+    /**
+     * Message that we would like to display somewhere on loading
+     * shown on main loader when loading
+     */ 
+    message: 'Loading...',
 }, action) => {
     switch(action.type) {
         case START_LOADING:
