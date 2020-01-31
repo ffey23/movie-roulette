@@ -1,3 +1,4 @@
+// TODO make this functions part of the auth redux actions
 import store from '../redux/store';
 import api from '../services/api';
 import Swal from 'sweetalert2';
@@ -73,7 +74,9 @@ const logout = () => {
 const syncReduxWithLocalStorage = () => {
     if (!store.getState().loggedIn && window.localStorage.getItem('session_id')) {
         store.dispatch(loginAC(window.localStorage.getItem('session_id')));
+        return Promise.resolve({loggedIn: true})
     }
+    return Promise.resolve({loggedIn: false})
 }
 
 export {
