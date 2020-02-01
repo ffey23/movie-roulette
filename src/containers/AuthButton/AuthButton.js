@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import Button from '../../components/Button/Button';
@@ -65,6 +66,13 @@ const mapDispatchToProps = (dispatch) => {
         startLoading: (message) => dispatch(startLoading(true, message)),
         finishLoading: () => dispatch(finishLoading()),
     }
+}
+
+AuthButtonWrapper.propTypes = {
+    text: PropTypes.string,
+    loggedIn: PropTypes.bool,
+    startLoading: PropTypes.func,
+    finishLoading: PropTypes.func,
 }
 
 const AuthButton = connect(
