@@ -7,7 +7,7 @@ export default {
             return axiosV3.get('genre/movie/list', {
                 params: {
                     api_key: process.env.REACT_APP_API_KEY
-        }
+                }
             })
         }
     },
@@ -54,6 +54,26 @@ export default {
                     api_key: process.env.REACT_APP_API_KEY
                 }
             });
+        },
+        get_details(id, session_id) {
+            return axiosV3.get(`movie/${id}`, {
+                params: {
+                    api_key: process.env.REACT_APP_API_KEY,
+                    append_to_response: 'account_states',
+                    language: 'en-US',
+                    session_id: session_id,
+                }
+            })
+        },
+        rate(movie_id, session_id, value) {
+            return axiosV3.post(`movie/${movie_id}/rating`, {
+                value
+            }, {
+                params:  {
+                    api_key: process.env.REACT_APP_API_KEY,
+                    session_id: session_id,
+                }
+            })
         }
     }
 };
