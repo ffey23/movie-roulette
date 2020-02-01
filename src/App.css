@@ -1,4 +1,10 @@
 @import 'assets/icomoon/style.css';
+
+.App__container {
+  max-width: 980px;
+  margin: auto;
+}
+
 .App__header {
   height: 80px;
   background-color: #7b181b;
