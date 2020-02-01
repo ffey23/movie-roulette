@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { login } from '../utilities/auth';
 import { startLoading, finishLoading} from '../redux/loading/actions';
 import { Redirect } from 'react-router-dom';
+import RouletteMovieList from '../containers/RouletteMovieList/RouletteMovieList';
 
-const Home = ({location, fetchingTokenStart, fetchingTokenFinish }) => {
+const HomeWrapper = ({location, fetchingTokenStart, fetchingTokenFinish, loggedIn }) => {
        
     const [navigation, setNavigation] = useState(null);
     const requestToken = window.localStorage.getItem('request_token');
@@ -33,8 +35,27 @@ const Home = ({location, fetchingTokenStart, fetchingTokenFinish }) => {
             {
                 navigation && <Redirect to={navigation} />
             }
+            {
+                loggedIn ? (
+                    <div>
+                        <RouletteMovieList />
+                    </div>
+
+                ) :
+                (
+                    <div>
+                        This is not loggin page
+                    </div>
+                )
+            }
         </div>
     )
+}
+
+const mapStateToProps = state => {
+    return {
+      loggedIn: state.auth.loggedIn,
+    }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -42,11 +63,17 @@ const mapDispatchToProps = dispatch => {
       fetchingTokenStart: () => dispatch(startLoading(true, 'Fetching access token')),
       fetchingTokenFinish: () => dispatch(finishLoading()),
     }
-  }
-  
-  const HomeConnected = connect(
-      null,
-      mapDispatchToProps,
-  )(Home);
+}
 
-export default HomeConnected;
+HomeWrapper.propTypes = {
+    loggedIn: PropTypes.bool,
+    fetchingTokenStart: PropTypes.func,
+    fetchingTokenFinish: PropTypes.func,
+}
+
+const Home = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(HomeWrapper);
+
+export default Home;
