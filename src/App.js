@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import 'normalize.css';
 import './App.scss';
 import Home from './pages/Home';
 import Details from './pages/MovieDetails/MovieDetails';
