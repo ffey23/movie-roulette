@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Loader from '../../components/Loader/Loader';
 import './MainLoader.css';
 
@@ -12,7 +13,6 @@ class LoaderWrapper extends Component {
       <div className="loader-wrapper">
         <Loader message={message} />
       </div>
-
     );
   }
   componentDidUpdate() {
@@ -23,6 +23,11 @@ class LoaderWrapper extends Component {
       document.body.style.overflow = 'auto';
     }
   }
+}
+
+LoaderWrapper.propTypes = {
+  message: PropTypes.string,
+  show: PropTypes.bool,
 }
 
 const mapStateToProps = state => {
