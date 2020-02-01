@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loader from '../../components/Loader/Loader';
-import './MainLoader.css';
+import './MainLoader.scss';
 
 // Needed for conditionally show component
 class LoaderWrapper extends Component {

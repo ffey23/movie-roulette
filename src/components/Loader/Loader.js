@@ -1,5 +1,5 @@
 import React from 'react';
-import './Loader.css';
+import './Loader.scss';
 import PropTypes from 'prop-types';
 
 class Loader extends React.Component {

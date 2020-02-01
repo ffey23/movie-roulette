@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import api from '../../services/api';
 import Swal from 'sweetalert2';
 import Rating from 'react-rating';
-import './MovieDetails.css'
+import './MovieDetails.scss'
 import Loader from '../../components/Loader/Loader';
 
 const MovieDetails = () => {
