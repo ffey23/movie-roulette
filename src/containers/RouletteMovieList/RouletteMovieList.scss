@@ -2,6 +2,54 @@
 @import '../../assets/mixins.scss';
 
 
+.roulette-movie-list__genres-modal-popup {
+    padding: 0;
+}
+
+.roulette-movie-list__genres-modal-header {
+    height: 50px;
+    line-height: 50px;
+    background-color: $c-primary;
+}
+
+.roulette-movie-list__genres-modal-title {
+    width: 100%;
+    color: $c-primary-text;
+    font-weight: normal;
+    padding-left: 20px;
+}
+
+.roulette-movie-list__genres-modal-content {
+    max-height: 385px;
+    overflow: auto;
+    padding-left: 20px;
+    $color: black;
+
+    .swal2-radio {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        label {
+            padding-bottom: 8px;
+        }
+    }
+
+    .swal2-html-container {
+        display: block;
+        text-align: left;
+        padding-top: 30px;
+        color: #000;
+        font-weight: bold;
+    }
+}
+
+.roulette-movie-list__genres-modal-actions {
+    .swal2-confirm {
+        width: 100%;
+        font-weight: bold;
+        @include confirmButtonTheme;
+    }
+}
 
 .roulette-movie-list__movie-list {
     margin-bottom: 25px;

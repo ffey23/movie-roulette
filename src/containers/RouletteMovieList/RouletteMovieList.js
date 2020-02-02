@@ -10,13 +10,13 @@ import Swal from 'sweetalert2';
 import './RouletteMovieList.scss';
 
 class RouletteMovieListWrapper extends Component {
-  //const StyledButton = styled
+
   render() {
     const {moviesShown, moviesAll, moviesLoading, genres, fetchMovies} = this.props;
     return (
       <div className="roulette-movie-list">
         <div className="roulette-movie-list__movie-list">
-        <MovieList movies={moviesShown} />
+          <MovieList movies={moviesShown} />
         </div>
         {/* 
           * Hides load and roll button when movies are loading
@@ -29,18 +29,18 @@ class RouletteMovieListWrapper extends Component {
           </div>
         }
           <div className="roulette-movie-list__buttons">
-        { !moviesLoading &&
+            { !moviesLoading &&
             <div className="roulette-movie-list__load-button">
               <Button onClick={fetchMovies.bind(this, undefined)} text="Load"/>
             </div>
-        }
-        {/* We also need to load genres from the server to open "Choose genres" popup */}
-        { !moviesLoading && !!genres.length &&
+            }
+            {/* We also need to load genres from the server to open "Choose genres" popup */}
+            { !moviesLoading && !!genres.length &&
               <div className="roulette-movie-list__roll-button">
-        <Button onClick={this.openGenresModal.bind(this)} text="Roll"/>
+                <Button onClick={this.openGenresModal.bind(this)} text="Roll"/>
               </div>
-        }
-      </div>
+            }
+          </div>
       </div>
     );
   }
@@ -71,18 +71,32 @@ class RouletteMovieListWrapper extends Component {
   }
 
   openGenresModal() {
-      const { genres, fetchMovies } = this.props;
-      const inputOptions = genres.reduce((total, current) => ({
+      const { genres, currentGenre, fetchMovies } = this.props;
+      let inputOptions = genres.reduce((total, current) => ({
             ...total, [current.id]: current.name
-        }), {'null': 'All genres'});
+        }), {0 : 'All genres'});
+      console.log(inputOptions);
       Swal.fire({
+          title: 'Movie Roulette',
+          text: 'Select genre:',
+          customClass: {
+            popup: 'roulette-movie-list__genres-modal-popup',
+            header: 'roulette-movie-list__genres-modal-header',
+            title: 'roulette-movie-list__genres-modal-title',
+            content: 'roulette-movie-list__genres-modal-content',
+            actions: 'roulette-movie-list__genres-modal-actions',
+          },
           input: 'radio',
           inputOptions: inputOptions,
-          inputValue: genres[0].id,
+          inputValue: currentGenre || 0,
+          confirmButtonText: 'Roll',
+          
       }).then(result => {
           if(result.dismiss) console.log('Dismissed!!!')
-          const genreId = result.value == 'null' ? null : +result.value;
-          fetchMovies(genreId);
+          else {
+            const genreId = result.value == '0' ? null : +result.value;
+            fetchMovies(genreId);
+          }
       })
   }
 }
@@ -94,6 +108,7 @@ const mapStateToProps = state => {
         moviesShown: movieList.slice(0,shownMoviesCount),
         moviesLoading, 
         genres: state.fixtures.genres,
+        currentGenre: state.movieRoulette.fetchMoviesParams.with_genres,
     }
 }
 
