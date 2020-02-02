@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MovieItem from '../MovieItem/MovieItem';
+import './MovieList.scss';
 
 const MovieList = ({movies}) => {
     const movieItems = movies.map(m => 
