@@ -5,7 +5,7 @@ import {
     // SHOW_MORE_MOVIES,
 } from './actions';
 
-const movieRoulete = (state = {
+const movieRoulette = (state = {
     // Will be directly used as request body object so using _ instead of camelCase
     fetchMoviesParams: {
         page: 1,
@@ -97,4 +97,4 @@ const showMovies = (movieList, shownMoviesCount, newShownCount) => {
     }
     return [...shownMovies, ...unshownMovies];
 }
-export default movieRoulete;
+export default movieRoulette;
