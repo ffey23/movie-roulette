@@ -75,7 +75,6 @@ class RouletteMovieListWrapper extends Component {
       let inputOptions = genres.reduce((total, current) => ({
             ...total, [current.id]: current.name
         }), {0 : 'All genres'});
-      console.log(inputOptions);
       Swal.fire({
           title: 'Movie Roulette',
           text: 'Select genre:',
@@ -90,9 +89,9 @@ class RouletteMovieListWrapper extends Component {
           inputOptions: inputOptions,
           inputValue: currentGenre || 0,
           confirmButtonText: 'Roll',
-          
+
       }).then(result => {
-          if(result.dismiss) console.log('Dismissed!!!')
+          if(result.dismiss) Promise.resolve()
           else {
             const genreId = result.value == '0' ? null : +result.value;
             fetchMovies(genreId);
