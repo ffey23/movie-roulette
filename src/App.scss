@@ -1,20 +1,57 @@
 @import 'assets/base.scss';
+@import 'assets/variables.scss';
+@import 'assets/mixins.scss';
 @import 'assets/icomoon/style.scss';
 
 .App__container {
-  max-width: 980px;
+  max-width: $lg;
+  padding: 20px;
   margin: auto;
 }
 
 .App__header {
-  height: 80px;
-  background-color: #7b181b;
-  color: #fff;
+  height: 44px;
+  background-color: $c-primary;
+  color: $c-primary-text;
+  @include fromLg {
+    height: 80px;
+  }
+}
+
+.App__container--header {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.App__title--big {
+  display: none;
+  @include fromLg {
+    display: block; 
+  }
+}
+
+.App__title--small {
+  @include fromLg {
+    display: none; 
+  }
+}
+
+.App__header .auth__button {
+  .button {
+    border: 1px solid #000;
+    height: 30px;
+    width: 90px;
+    background-color: $c-primary-light;
+    color: $c-primary-text;
+    font-weight: bold;
+  }
 }
 
 .App__main {
   min-height: calc(100vh - 80px);
-  background-color: #ECEDF2;
+  background-color: $c-neutral-light;
   /* 
     CONSIDER: adding popcorn background image
     Code in next comment isn't optimal in all situations 

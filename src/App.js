@@ -18,8 +18,12 @@ const App = () => {
       <Router>
         <div className="App">
           <header className="App__header">
-            <div className="App__container">
-              <AuthButton className="App__header-auth-button"/>
+            <div className="App__container App__container--header">
+              <h1 className="App__title">
+                <span className="App__title--big">Movie Roulette</span>
+                <span className="App__title--small">MR</span>
+              </h1>
+              <AuthButton />
             </div>
           </header>
           <main className="App__main">
