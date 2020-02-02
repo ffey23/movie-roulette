@@ -44,6 +44,8 @@
 }
 
 .movie-item__info {
+    // Hides overflown text when it is flexbox item (md)
+    overflow: hidden;
     padding: 10px;
     @include fromLg {
         padding-top: 0;
@@ -56,4 +58,5 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    
 }
