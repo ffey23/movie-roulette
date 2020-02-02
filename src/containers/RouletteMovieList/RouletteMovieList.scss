@@ -1,0 +1,39 @@
+
+.roulette-movie-list__movie-list {
+    margin-bottom: 25px;
+}
+
+.roulette-movie-list__buttons {
+    position: relative;
+    .button {
+        width: 100%;
+        height: 90px;
+        border-width: 0;
+        border-radius: 10px;
+        @include confirmButtonTheme;
+        font-weight: bold;
+        font-size: 2em;
+        margin-bottom: 15px;
+        @include fromMd {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            font-size:1.5em;
+        }
+    }
+}
+
+.roulette-movie-list__load-button {
+    @include fromMd {
+        text-align: center;
+    }
+}
+
+.roulette-movie-list__roll-button {
+    @include fromMd {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+    }
+}

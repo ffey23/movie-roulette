@@ -7,13 +7,17 @@ import Loader from '../../components/Loader/Loader';
 import { fetchRouletteMovies } from '../../redux/movie-roulette/actions';
 import { fetchGenres } from '../../redux/fixtures/actions';
 import Swal from 'sweetalert2';
+import './RouletteMovieList.scss';
 
 class RouletteMovieListWrapper extends Component {
+  //const StyledButton = styled
   render() {
     const {moviesShown, moviesAll, moviesLoading, genres, fetchMovies} = this.props;
     return (
       <div className="roulette-movie-list">
+        <div className="roulette-movie-list__movie-list">
         <MovieList movies={moviesShown} />
+        </div>
         {/* 
           * Hides load and roll button when movies are loading
           * We also need to hide load button if we don't have more movies to load
@@ -24,14 +28,19 @@ class RouletteMovieListWrapper extends Component {
             <Loader message="Fetching movies!" />
           </div>
         }
-
+          <div className="roulette-movie-list__buttons">
         { !moviesLoading &&
-          <Button onClick={fetchMovies.bind(this, undefined)} text="Load More"/>
+            <div className="roulette-movie-list__load-button">
+              <Button onClick={fetchMovies.bind(this, undefined)} text="Load"/>
+            </div>
         }
         {/* We also need to load genres from the server to open "Choose genres" popup */}
         { !moviesLoading && !!genres.length &&
+              <div className="roulette-movie-list__roll-button">
         <Button onClick={this.openGenresModal.bind(this)} text="Roll"/>
+              </div>
         }
+      </div>
       </div>
     );
   }
