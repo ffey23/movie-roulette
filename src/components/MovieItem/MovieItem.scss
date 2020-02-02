@@ -6,14 +6,21 @@
 
     border: 2px solid $c-neutral-dark;
     border-radius: 5px;
+
     // 1. Make picture grow to the title if it has to
     @include fromMd {
         display: flex;
     }
+
     @include fromLg {
         flex-direction: column;
         justify-content: space-between;
     }
+
+    &:hover {
+        cursor: pointer;
+    }
+
 }
 
 .movie-item__rating {
