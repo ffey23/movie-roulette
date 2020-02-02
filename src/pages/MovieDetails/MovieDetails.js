@@ -57,16 +57,18 @@ const MovieDetails = () => {
             <h2 className="movie-details__header">
                 {movie.original_title}
             </h2>
-            <div className="movie-details__poster">
+            <div className="movie-details__backdrop">
                 <img 
-                    src={`${process.env.REACT_APP_IMAGES_BASE_URL}w500/${movie.poster_path}`}
+                    src={`${process.env.REACT_APP_IMAGES_BASE_URL}w500${movie.backdrop_path}`}
                     className="movie-details__image"
                     alt={`Poster for movie ${movie.original_title}`}
                 />
-                <div className="movie-details__overview">
+                <div className="movie-details__overview movie-details__overview">
                     {movie.overview}
                 </div>
-                <div className="movie-details__rating">
+            </div>
+            <div className="movie-details__bottom">
+                <div className="movie-details__rating"> 
                     <Rating 
                         stop={10}
                         fractions={2}
@@ -76,23 +78,23 @@ const MovieDetails = () => {
                         emptySymbol="icon-star-empty"
                         fullSymbol="icon-star-full"
                         />
-                    My rating: {myRating}
                 </div>
                 <div className="movie-details__about">
                     <p className="movie-details__about-info">
-                        Rating: {movie.vote_average}
+                        <span className="movie-details__info-name">Rating:</span> {movie.vote_average}
                     </p>
                     <p className="movie-details__about-info">
-                        Popularity: {movie.popularity}
+                        <span className="movie-details__info-name">Popularity:</span> {movie.popularity}
                     </p>
                     <p className="movie-details__about-info">
-                        Language: {movie.original_language}
+                        <span className="movie-details__info-name">Language:</span> {movie.original_language}
                     </p>
                     <p className="movie-details__about-info">
-                        Production companies: {movie.production_companies.map((c) => c.name ).join(', ')}
+                        <span className="movie-details__info-name">Production companies:</span> {movie.production_companies.map((c) => c.name ).join(', ')}
                     </p>
                 </div>
             </div>
+            
             { loading && <Loader message="Movie is loading"/>}
         </div>
     );
