@@ -1,0 +1,7 @@
+@import './variables.scss';  // minimal width of tablets - landscape
+
+@mixin fromLg {
+    @media screen and (min-width: $lg){
+        @content
+    }
+}
