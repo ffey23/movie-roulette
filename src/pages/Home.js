@@ -31,7 +31,7 @@ const HomeWrapper = ({location, fetchingTokenStart, fetchingTokenFinish, loggedI
     }
 
     return (
-        <div className="home">I am home
+        <div className="home">
             {
                 navigation && <Redirect to={navigation} />
             }
@@ -43,8 +43,17 @@ const HomeWrapper = ({location, fetchingTokenStart, fetchingTokenFinish, loggedI
 
                 ) :
                 (
-                    <div>
-                        This is not loggin page
+                    <div className="landing">
+                        <h2 className="landing__heading">Don't know what to watch?</h2>
+                        <div className="landing__feature-info">
+                           <strong>Get our movies suggestions</strong> based on your preferred category
+                        </div>
+                        <div className="landing__feature-info">
+                            <strong>Find out details about the movie</strong> you would like to watch
+                        </div>
+                        <div className="landing__feature-info">
+                            <strong>Rate movies</strong> you like or dislike
+                        </div>
                     </div>
                 )
             }
