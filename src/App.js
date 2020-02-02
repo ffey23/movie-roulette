@@ -34,7 +34,6 @@ const App = () => {
                 <Route path="/" component={Home} />
               </Switch>
             </div>
-            <MainLoader/>
           </main>
           <footer className="App__footer">
             <div className="App__container App__container--footer">
@@ -46,6 +45,7 @@ const App = () => {
               </div> 
             </div>
           </footer>
+          <MainLoader/>
         </div>
       </Router>
     );
