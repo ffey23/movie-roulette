@@ -4,4 +4,11 @@
     @media screen and (min-width: $lg){
         @content
     }
+
+@mixin confirmButtonTheme {
+    background-color: $button-confirm-color;
+    color: $c-primary-text;
+    &:hover {
+        background-color: $button-confirm-color-hover
 }
+};
