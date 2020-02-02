@@ -1,0 +1,13 @@
+.rating__display {
+    position: relative;
+    .icon-star-full {
+        font-size: 2.7em;
+    }
+}
+
+.rating-display__number {
+    position:absolute;
+    font-weight: bold;
+    top:13px;
+    left:10px;
+}
