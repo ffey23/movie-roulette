@@ -1,18 +1,19 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 import {useParams} from 'react-router-dom';
+import {startLoading, finishLoading} from '../../redux/loading/actions';
 import api from '../../services/api';
 import Swal from 'sweetalert2';
 import Rating from 'react-rating';
 import './MovieDetails.scss'
-import Loader from '../../components/Loader/Loader';
 
-const MovieDetails = () => {
+let MovieDetails = ({startLoading, finishLoading}) => {
     const {id} = useParams();
     const [movie, setMovie] = useState(null);
     const [myRating, setMyRating] = useState(0);
-    const [loading, setLoading] = useState(true);
     
-    useEffect(() => {   
+    useEffect(() => {
+        startLoading('Fetching movie!');
         api.movies.get_details(id, localStorage.getItem('session_id'))
         .then(movie => {
             setMovie(movie);
@@ -24,9 +25,9 @@ const MovieDetails = () => {
                 text: 'Unable to load movie!',
             });
         }).finally(() => {
-            setLoading(false)
+            finishLoading();
         });
-    }, [id])
+    }, [id, startLoading, finishLoading])
 
     const rate = (value) => {
 
@@ -94,11 +95,21 @@ const MovieDetails = () => {
                     </p>
                 </div>
             </div>
-            
-            { loading && <Loader message="Movie is loading"/>}
         </div>
     );
 
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        startLoading: (message) => dispatch(startLoading(true, message)),
+        finishLoading: () => dispatch(finishLoading()),
+    }
+}
+
+MovieDetails = connect(
+    null,
+    mapDispatchToProps,
+)(MovieDetails);
 
 export default MovieDetails;
