@@ -25,16 +25,16 @@
   align-items: center;
 }
 
+.App__title--small {
+  @include fromLg {
+    display: none; 
+  }
+}
+
 .App__title--big {
   display: none;
   @include fromLg {
     display: block; 
-  }
-}
-
-.App__title--small {
-  @include fromLg {
-    display: none; 
   }
 }
 
@@ -63,4 +63,19 @@
 .App__footer {
   height: 80px;
   color: #7b181b;
+}
+
+.App__container--footer {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.App__footer-href {
+  margin-bottom: 12px;
+}
+
+.App__movie-db-logo {
+  width: 100px;
 }

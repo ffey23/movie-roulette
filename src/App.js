@@ -11,6 +11,7 @@ import Details from './pages/MovieDetails/MovieDetails';
 import MainLoader from './containers/MainLoader/MainLoader';
 import AuthButton from './containers/AuthButton/AuthButton';
 import { syncReduxWithLocalStorage } from './utilities/auth';
+import {ReactComponent as MdbLogo}  from './assets/images/movie-db-logo.svg';
 
 const App = () => {
     syncReduxWithLocalStorage();
@@ -28,16 +29,21 @@ const App = () => {
           </header>
           <main className="App__main">
             <div className="App__container">
-            <Switch>
-              <Route path="/movie-details/:id" component={Details} />
-              <Route path="/" component={Home} />
-            </Switch>
+              <Switch>
+                <Route path="/movie-details/:id" component={Details} />
+                <Route path="/" component={Home} />
+              </Switch>
             </div>
             <MainLoader/>
           </main>
           <footer className="App__footer">
-            <div className="App__container">
-            <a href="https://icons8.com/icon/W71PIW3yxyeJ/roulette">Roulette icon by Icons8</a>
+            <div className="App__container App__container--footer">
+              <div className="App__footer-href">
+                <a href="https://icons8.com/icon/W71PIW3yxyeJ/roulette">Roulette icon by Icons8</a>
+              </div>
+              <div className="App__movie-db-logo">
+                <MdbLogo />
+              </div> 
             </div>
           </footer>
         </div>
