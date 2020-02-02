@@ -4,6 +4,13 @@
     @media screen and (min-width: $lg){
         @content
     }
+};
+
+@mixin fromMd {
+    @media screen and (min-width: $md){
+        @content
+    }
+};
 
 @mixin confirmButtonTheme {
     background-color: $button-confirm-color;
