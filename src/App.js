@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import 'normalize.css';
 import './App.scss';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import Details from './pages/MovieDetails/MovieDetails';
 import MainLoader from './containers/MainLoader/MainLoader';
 import AuthButton from './containers/AuthButton/AuthButton';

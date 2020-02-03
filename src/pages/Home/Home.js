@@ -1,10 +1,15 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { login } from '../utilities/auth';
-import { startLoading, finishLoading} from '../redux/loading/actions';
+import { login } from '../../utilities/auth';
+import { startLoading, finishLoading} from '../../redux/loading/actions';
 import { Redirect } from 'react-router-dom';
-import RouletteMovieList from '../containers/RouletteMovieList/RouletteMovieList';
+import RouletteMovieList from '../../containers/RouletteMovieList/RouletteMovieList';
+import {ReactComponent as Suggestion}  from '../../assets/images/suggestion.svg';
+import {ReactComponent as EmptyStar}  from '../../assets/images/star-empty.svg';
+import {ReactComponent as Details}  from '../../assets/images/details.svg';
+import styled from 'styled-components';
+import './Home.scss';
 
 const HomeWrapper = ({location, fetchingTokenStart, fetchingTokenFinish, loggedIn }) => {
        
@@ -29,7 +34,15 @@ const HomeWrapper = ({location, fetchingTokenStart, fetchingTokenFinish, loggedI
             setNavigation('/')
         })
     }
-
+    const SvgWrapper = styled.div`
+        text-align: center;
+        padding: 20px;
+        svg {
+            width: 42px;
+            height: 42px;
+            fill: #7b181b;
+        }
+    `;
     return (
         <div className="home">
             {
@@ -45,14 +58,26 @@ const HomeWrapper = ({location, fetchingTokenStart, fetchingTokenFinish, loggedI
                 (
                     <div className="landing">
                         <h2 className="landing__heading">Don't know what to watch?</h2>
-                        <div className="landing__feature-info">
-                           <strong>Get our movies suggestions</strong> based on your preferred category
-                        </div>
-                        <div className="landing__feature-info">
-                            <strong>Find out details about the movie</strong> you would like to watch
-                        </div>
-                        <div className="landing__feature-info">
-                            <strong>Rate movies</strong> you like or dislike
+                        <p className="landing__text">We'll make your life easier!</p>
+                        <div className="landing__features">
+                            <div className="landing__feature-info">
+                                <SvgWrapper>
+                                    <Suggestion/>
+                                </SvgWrapper>
+                               <strong>Get our movies suggestions</strong>
+                            </div>
+                            <div className="landing__feature-info">
+                                <SvgWrapper>
+                                    <Details />
+                                </SvgWrapper>
+                                <strong>Find out details about the movie</strong>
+                            </div>
+                            <div className="landing__feature-info">
+                                <SvgWrapper>
+                                    <EmptyStar />
+                                </SvgWrapper>
+                                <strong>Rate movies</strong>
+                            </div>
                         </div>
                     </div>
                 )

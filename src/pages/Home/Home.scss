@@ -1,0 +1,39 @@
+@import '../../assets/variables.scss';
+@import '../../assets/mixins.scss';
+
+.landing {
+    text-align: center;
+    color: $c-primary;
+}
+
+.landing__heading {
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.landing__text {
+    color: $c-text-light;
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.landing__features {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    @include fromMd {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    @include fromLg {
+        grid-gap: 119px;
+    }
+}
+
+.landing__feature-info {
+    border: 2px solid $c-neutral-dark;
+    border-radius: 10px;
+    padding: 0 10px 20px;
+    color: $c-text-light;
+}
