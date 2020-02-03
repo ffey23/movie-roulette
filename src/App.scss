@@ -55,12 +55,6 @@
   @include fromLg {
     min-height: calc(100vh - 80px);
   }
-  /* 
-    CONSIDER: adding popcorn background image
-    Code in next comment isn't optimal in all situations 
-  */
-  /* background: url("/bg-image.jpg") no-repeat center center fixed;
-  background-size: cover; */
 }
 
 .App__footer {
