@@ -50,8 +50,11 @@
 }
 
 .App__main {
-  min-height: calc(100vh - 80px);
   background-color: $c-neutral-light;
+  min-height: calc(100vh - 44px);
+  @include fromLg {
+    min-height: calc(100vh - 80px);
+  }
   /* 
     CONSIDER: adding popcorn background image
     Code in next comment isn't optimal in all situations 
