@@ -57,35 +57,51 @@
 
 .roulette-movie-list__buttons {
     position: relative;
+    @include fromMd {
+        display: flex;
+    }
     .button {
+        @include confirmButtonTheme;
         width: 100%;
         height: 90px;
         border-width: 0;
         border-radius: 10px;
-        @include confirmButtonTheme;
         font-weight: bold;
         font-size: 2em;
         margin-bottom: 15px;
-        @include fromMd {
+        @include fromLg {
             width: 90px;
             height: 90px;
+            font-size: 1.5em;
+            position: relative;
+            text-align: center;
+            line-height: 90px;
             border-radius: 50%;
-            font-size:1.5em;
         }
     }
 }
 
 .roulette-movie-list__load-button {
     @include fromMd {
+        flex-grow: 1;
+        padding-right: 5px;
+    }
+    @include fromLg {
+        padding-right: 0;
         text-align: center;
     }
 }
 
 .roulette-movie-list__roll-button {
     @include fromMd {
+        flex-grow: 1;
+        padding-left: 5px;
+    }
+    @include fromLg {
         position: absolute;
         top: 0;
         right: 0;
+        padding-left: 0;
 
     }
 }
