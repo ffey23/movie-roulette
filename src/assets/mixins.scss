@@ -14,8 +14,11 @@
 
 @mixin confirmButtonTheme {
     background-color: $button-confirm-color;
+    background: linear-gradient(135deg, $button-confirm-color, $button-confirm-color-dark);
     color: $c-primary-text;
     &:hover {
-        background-color: $button-confirm-color-hover
+        background-color: $button-confirm-color-light;
+        background: linear-gradient(135deg, $button-confirm-color-light, $button-confirm-color);
     }
+    box-shadow: 3px 7px 9px #777, inset 0px 2px 3px #fff;
 };
