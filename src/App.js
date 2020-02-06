@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { checkLoggedIn } from './redux/auth/actions';
 import 'normalize.css';
 import './App.scss';
 import Home from './pages/Home/Home';
@@ -8,9 +10,10 @@ import MainLoader from './containers/MainLoader/MainLoader';
 import AuthButton from './containers/AuthButton/AuthButton';
 import { ReactComponent as MdbLogo } from './assets/images/movie-db-logo.svg';
 import ProtectedRoute from './containers/ProtectedRoute/ProtectedRoute';
+import PropTypes from 'prop-types';
 
-const App = () => {
-  syncReduxWithLocalStorage();
+let App = ({ checkLoggedIn }) => {
+  checkLoggedIn();
   return (
     <Router>
       <div className='App'>
@@ -48,5 +51,15 @@ const App = () => {
     </Router>
   );
 };
+
+const mapDispatchToProps = dispatch => ({
+  checkLoggedIn: () => dispatch(checkLoggedIn()),
+});
+
+App.propTypes = {
+  checkLoggedIn: PropTypes.func.isRequired,
+};
+
+App = connect(null, mapDispatchToProps)(App);
 
 export default App;

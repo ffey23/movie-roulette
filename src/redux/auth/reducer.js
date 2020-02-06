@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from './actions';
+import { RECEIVE_LOGIN_DATA, LOGOUT_SUCCESS } from './actions';
 
 const auth = (
   state = {
@@ -8,12 +8,12 @@ const auth = (
   action
 ) => {
   switch (action.type) {
-    case LOGIN:
+    case RECEIVE_LOGIN_DATA:
       return {
         loggedIn: true,
         sessionId: action.payload,
       };
-    case LOGOUT:
+    case LOGOUT_SUCCESS:
       return {
         loggedIn: false,
         sessionId: null,
