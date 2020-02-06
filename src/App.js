@@ -8,6 +8,7 @@ import MainLoader from './containers/MainLoader/MainLoader';
 import AuthButton from './containers/AuthButton/AuthButton';
 import { syncReduxWithLocalStorage } from './utilities/auth';
 import { ReactComponent as MdbLogo } from './assets/images/movie-db-logo.svg';
+import Protected from './containers/Protected/Protected';
 
 const App = () => {
   syncReduxWithLocalStorage();
@@ -26,7 +27,7 @@ const App = () => {
         <main className='App__main'>
           <div className='App__container'>
             <Switch>
-              <Route path='/movie-details/:id' component={Details} />
+              <Protected path='/movie-details/:id' component={Details} />
               <Route path='/' component={Home} />
             </Switch>
           </div>
