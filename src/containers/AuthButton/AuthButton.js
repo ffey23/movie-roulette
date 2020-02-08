@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import { createRequestToken, logout } from '../../utilities/auth';
-import { startLoading, finishLoading } from '../../redux/loading/actions';
+import { createRequestToken, logout } from '../../redux/auth/actions';
 
 class AuthButton extends Component {
   constructor(props) {
@@ -33,28 +32,10 @@ class AuthButton extends Component {
    * Also we need to save request_token in local storage as we will need to use it for gaining access token after redirect
    */
   logIn() {
-    const { startLoading, finishLoading } = this.props;
-    startLoading('Creating request token');
-    createRequestToken()
-      .catch(err => {
-        console.error(err);
-      })
-      .finally(() => {
-        finishLoading();
-      });
+    this.props.createRequestToken();
   }
   logOut() {
-    startLoading('Loging out...');
-    logout()
-      .catch(err => {
-        console.error(err);
-      })
-      .finally(() => {
-        finishLoading();
-        this.setState({
-          navigate: '/',
-        });
-      });
+    this.props.logout();
   }
 }
 
@@ -67,16 +48,16 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    startLoading: message => dispatch(startLoading(true, message)),
-    finishLoading: () => dispatch(finishLoading()),
+    logout: () => dispatch(logout()),
+    createRequestToken: () => dispatch(createRequestToken()),
   };
 };
 
 AuthButton.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
   text: PropTypes.string,
-  loggedIn: PropTypes.bool,
-  startLoading: PropTypes.func,
-  finishLoading: PropTypes.func,
+  logout: PropTypes.func.isRequired,
+  createRequestToken: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthButton);
