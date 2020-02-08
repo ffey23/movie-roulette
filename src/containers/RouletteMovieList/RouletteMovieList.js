@@ -9,7 +9,7 @@ import { fetchGenres } from '../../redux/fixtures/actions';
 import Swal from 'sweetalert2';
 import './RouletteMovieList.scss';
 
-class RouletteMovieListWrapper extends Component {
+class RouletteMovieList extends Component {
   render() {
     const {
       moviesShown,
@@ -130,7 +130,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-RouletteMovieListWrapper.propTypes = {
+RouletteMovieList.propTypes = {
   moviesAll: PropTypes.array,
   moviesShown: PropTypes.array,
   moviesLoading: PropTypes.bool,
@@ -138,9 +138,4 @@ RouletteMovieListWrapper.propTypes = {
   fetchMovies: PropTypes.func,
   fetchGenres: PropTypes.func,
 };
-const RouletteMovieList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RouletteMovieListWrapper);
-
-export default RouletteMovieList;
+export default connect(mapStateToProps, mapDispatchToProps)(RouletteMovieList);

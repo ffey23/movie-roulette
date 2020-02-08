@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import Rating from 'react-rating';
 import './MovieDetails.scss';
 
-let MovieDetails = ({ startLoading, finishLoading }) => {
+const MovieDetails = ({ startLoading, finishLoading }) => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [myRating, setMyRating] = useState(0);
@@ -118,6 +118,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-MovieDetails = connect(null, mapDispatchToProps)(MovieDetails);
-
-export default MovieDetails;
+export default connect(null, mapDispatchToProps)(MovieDetails);

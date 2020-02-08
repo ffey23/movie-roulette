@@ -6,7 +6,7 @@ import Button from '../../components/Button/Button';
 import { createRequestToken, logout } from '../../utilities/auth';
 import { startLoading, finishLoading } from '../../redux/loading/actions';
 
-class AuthButtonWrapper extends Component {
+class AuthButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,16 +72,11 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-AuthButtonWrapper.propTypes = {
+AuthButton.propTypes = {
   text: PropTypes.string,
   loggedIn: PropTypes.bool,
   startLoading: PropTypes.func,
   finishLoading: PropTypes.func,
 };
 
-const AuthButton = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AuthButtonWrapper);
-
-export default AuthButton;
+export default connect(mapStateToProps, mapDispatchToProps)(AuthButton);

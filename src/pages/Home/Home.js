@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import RouletteMovieList from '../../containers/RouletteMovieList/RouletteMovieList';
 import Landing from '../../components/Landing/Landing';
 
-const HomeWrapper = ({
+const Home = ({
   location,
   fetchingTokenStart,
   fetchingTokenFinish,
@@ -60,12 +60,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-HomeWrapper.propTypes = {
+Home.propTypes = {
   loggedIn: PropTypes.bool,
   fetchingTokenStart: PropTypes.func,
   fetchingTokenFinish: PropTypes.func,
 };
 
-const Home = connect(mapStateToProps, mapDispatchToProps)(HomeWrapper);
-
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

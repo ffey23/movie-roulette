@@ -5,7 +5,7 @@ import Loader from '../../components/Loader/Loader';
 import './MainLoader.scss';
 
 // Needed for conditionally show component
-class LoaderWrapper extends Component {
+class MainLoader extends Component {
   render() {
     const { message, show } = this.props;
     if (!show) return null;
@@ -25,7 +25,7 @@ class LoaderWrapper extends Component {
   }
 }
 
-LoaderWrapper.propTypes = {
+MainLoader.propTypes = {
   message: PropTypes.string,
   show: PropTypes.bool,
 };
@@ -37,6 +37,4 @@ const mapStateToProps = state => {
   };
 };
 
-const MainLoader = connect(mapStateToProps)(LoaderWrapper);
-
-export default MainLoader;
+export default connect(mapStateToProps)(MainLoader);
