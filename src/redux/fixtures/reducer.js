@@ -1,4 +1,4 @@
-import { RECEIVE_GENRES } from './actions';
+import { GENRES_SUCCESS } from './actions';
 
 const fixtures = (
   state = {
@@ -7,10 +7,10 @@ const fixtures = (
   action
 ) => {
   switch (action.type) {
-    case RECEIVE_GENRES:
+    case GENRES_SUCCESS:
       return {
         ...state,
-        genres: action.payload.genres,
+        genres: action.response.genres,
       };
     default:
       return state;

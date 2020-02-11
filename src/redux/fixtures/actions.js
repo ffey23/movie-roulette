@@ -1,19 +1,15 @@
 import api from '../../services/api';
+import { API_MIDDLEWARE } from '../middlewares/api.middleware';
 
-const RECEIVE_GENRES = 'RECEIVE_GENRES';
-const receiveGenres = genres => ({
-  type: RECEIVE_GENRES,
-  payload: {
-    genres,
+const GENRES_REQUEST = 'GENRES_REQUEST',
+  GENRES_SUCCESS = 'GENRES_SUCCESS',
+  GENRES_FAILURE = 'GENRES_FAILURE';
+
+const fetchGenres = () => ({
+  [API_MIDDLEWARE]: {
+    api: [api.fixtures.get_genres],
+    types: [GENRES_REQUEST, GENRES_SUCCESS, GENRES_FAILURE],
   },
 });
 
-const fetchGenres = () => {
-  return dispatch => {
-    return api.fixtures
-      .get_genres()
-      .then(response => dispatch(receiveGenres(response.genres)));
-  };
-};
-
-export { RECEIVE_GENRES, fetchGenres };
+export { GENRES_SUCCESS, fetchGenres };
