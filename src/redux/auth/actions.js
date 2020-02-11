@@ -1,5 +1,6 @@
 //import * as auth from './utilities';
 import api from '../../services/api';
+import { API_MIDDLEWARE } from '../middlewares/api.middleware';
 import { startLoading, finishLoading } from '../loading/actions';
 import Swal from 'sweetalert2';
 
@@ -17,6 +18,20 @@ const logoutSuccess = () => {
     type: LOGOUT_SUCCESS,
   };
 };
+const REQUEST_TOKEN_REQUEST = 'REQUEST_TOKEN_REQUEST',
+  REQUEST_TOKEN_SUCCESS = 'REQUEST_TOKEN_SUCCESS',
+  REQUEST_TOKEN_FAILURE = 'REQUEST_TOKEN_FAILURE';
+
+const fetchRequestToken = () => ({
+  [API_MIDDLEWARE]: {
+    api: [api.auth.create_request_token],
+    types: [
+      REQUEST_TOKEN_REQUEST,
+      REQUEST_TOKEN_SUCCESS,
+      REQUEST_TOKEN_FAILURE,
+    ],
+  },
+});
 
 // Dispatch in the root app to check if user is logged in already
 const checkLoggedIn = () => {
@@ -30,20 +45,15 @@ const checkLoggedIn = () => {
 // Dispatch when you want to create request token and redirect for its authorization
 const createRequestToken = () => {
   return dispatch => {
-    dispatch(startLoading(true, 'Creating request token'));
-    return api.auth
-      .create_request_token()
-      .then(({ request_token }) => {
+    return dispatch(fetchRequestToken()).then(({ response }) => {
+      if (response) {
         // Saving request token into local storage and redirect to moviedb auth page
+        const { request_token } = response;
         window.localStorage.setItem('request_token', request_token);
         const validateRequestTokenUrl = `${process.env.REACT_APP_AUTHORIZATION_PAGE}request_token=${request_token}`;
         window.location = validateRequestTokenUrl;
-      })
-      .catch(err => {
-        // We want to end loading modal just on error, because on success we redirect
-        dispatch(finishLoading(true, 'Creating request token'));
-        console.log(err);
-      });
+      }
+    });
   };
 };
 
@@ -116,6 +126,9 @@ const displaySuccess = message => {
 export {
   RECEIVE_LOGIN_DATA,
   LOGOUT_SUCCESS,
+  REQUEST_TOKEN_REQUEST,
+  REQUEST_TOKEN_SUCCESS,
+  REQUEST_TOKEN_FAILURE,
   login,
   logout,
   checkLoggedIn,
