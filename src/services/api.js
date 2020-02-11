@@ -12,7 +12,7 @@ export default {
     },
   },
   auth: {
-    create_request_token() {
+    fetch_request_token() {
       return axiosV4.post('auth/request_token', {
         redirect_to: process.env.REACT_APP_LOGIN_REDIRECT,
       });

@@ -24,7 +24,7 @@ const REQUEST_TOKEN_REQUEST = 'REQUEST_TOKEN_REQUEST',
 
 const fetchRequestToken = () => ({
   [API_MIDDLEWARE]: {
-    api: [api.auth.create_request_token],
+    api: [api.auth.fetch_request_token],
     types: [
       REQUEST_TOKEN_REQUEST,
       REQUEST_TOKEN_SUCCESS,
