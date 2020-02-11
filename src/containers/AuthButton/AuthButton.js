@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import { createRequestToken, logout } from '../../redux/auth/actions';
+import { dismissError } from '../../redux/error/actions';
+import './AuthButton.scss';
+import Loader from '../../components/Loader/Loader';
+import Swal from 'sweetalert2';
 
 class AuthButton extends Component {
   constructor(props) {
@@ -12,9 +16,32 @@ class AuthButton extends Component {
       navigate: null,
     };
   }
+
+  renderLoader() {
+    const { loadingMessage } = this.props;
+    if (!loadingMessage) return null;
+    return (
+      <div className='auth-button__loader-wrapper'>
+        <Loader message={loadingMessage} />
+      </div>
+    );
+  }
+
+  renderError() {
+    const { error, dismissError } = this.props;
+    if (error) {
+      Swal.fire({
+        icon: 'error',
+        title: error.title,
+        text: error.message,
+      }).then(() => dismissError());
+    }
+  }
+
   render() {
     const { navigate } = this.state;
     const { text, loggedIn } = this.props;
+    this.renderError();
     return (
       <div className='auth__button'>
         {navigate && <Redirect to={`${navigate}`} push={true} />}
@@ -22,6 +49,7 @@ class AuthButton extends Component {
           text={text}
           onClick={loggedIn ? this.logOut.bind(this) : this.logIn.bind(this)}
         />
+        {this.renderLoader()}
       </div>
     );
   }
@@ -43,6 +71,8 @@ const mapStateToProps = state => {
   return {
     loggedIn: state.auth.loggedIn,
     text: state.auth.loggedIn ? 'Logout' : 'Login',
+    loadingMessage: state.auth.loadingMessage,
+    error: state.error,
   };
 };
 
@@ -50,14 +80,18 @@ const mapDispatchToProps = dispatch => {
   return {
     logout: () => dispatch(logout()),
     createRequestToken: () => dispatch(createRequestToken()),
+    dismissError: () => dispatch(dismissError()),
   };
 };
 
 AuthButton.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   text: PropTypes.string,
+  loadingMessage: PropTypes.string,
   logout: PropTypes.func.isRequired,
   createRequestToken: PropTypes.func.isRequired,
+  dismissError: PropTypes.func.isRequired,
+  error: PropTypes.object,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthButton);
