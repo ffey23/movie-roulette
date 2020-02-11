@@ -6,10 +6,24 @@ import Button from '../../components/Button/Button';
 import Loader from '../../components/Loader/Loader';
 import { fetchRouletteMovies } from '../../redux/movie-roulette/actions';
 import { fetchGenres } from '../../redux/fixtures/actions';
+import { dismissError } from '../../redux/error/actions';
 import Swal from 'sweetalert2';
 import './RouletteMovieList.scss';
 
 class RouletteMovieList extends Component {
+  renderError() {
+    const { error, dismissError } = this.props;
+    if (error) {
+      Swal.fire({
+        icon: 'error',
+        title: error.title,
+        text: error.message,
+      }).then(result => {
+        dismissError();
+      });
+    }
+  }
+
   render() {
     const {
       moviesShown,
@@ -18,6 +32,9 @@ class RouletteMovieList extends Component {
       genres,
       fetchMovies,
     } = this.props;
+
+    this.renderError();
+
     return (
       <div className='roulette-movie-list'>
         <div className='roulette-movie-list__movie-list'>
@@ -50,19 +67,30 @@ class RouletteMovieList extends Component {
   }
 
   componentDidMount() {
-    const { fetchMovies, fetchGenres, genres, moviesAll } = this.props;
+    const {
+      fetchMovies,
+      fetchGenres,
+      genres,
+      moviesAll,
+      dismissError,
+    } = this.props;
 
     // We fetches genres only if we already dont have them loaded
     genres.length ||
-      fetchGenres().catch(error => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Something went wrong!',
-          text: 'Roll feature is missing!',
+      fetchGenres()
+        // override default error message to more user friendly
+        // letting user know that everything works except roll feature
+        .then(result => {
+          dismissError();
+          if (result.error) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text:
+                'Everything works but roll feature is missing! Try to reload the page!',
+            });
+          }
         });
-        return Promise.resolve([]);
-      });
-
     // We prevent fetching new movies if someone goes back to this page from movie-details
     moviesAll.length ||
       fetchMovies().catch(err => {
@@ -120,6 +148,7 @@ const mapStateToProps = state => {
     moviesLoading,
     genres: state.fixtures.genres,
     currentGenre: state.movieRoulette.fetchMoviesParams.with_genres,
+    error: state.error,
   };
 };
 
@@ -127,6 +156,7 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchMovies: genre => dispatch(fetchRouletteMovies(genre)),
     fetchGenres: () => dispatch(fetchGenres()),
+    dismissError: () => dispatch(dismissError()),
   };
 };
 
@@ -137,5 +167,8 @@ RouletteMovieList.propTypes = {
   genres: PropTypes.array,
   fetchMovies: PropTypes.func,
   fetchGenres: PropTypes.func,
+  dismissErrorMessage: PropTypes.func,
+  currentGenre: PropTypes.number,
+  error: PropTypes.object,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(RouletteMovieList);
