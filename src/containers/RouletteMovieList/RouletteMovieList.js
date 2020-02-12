@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import MovieList from '../../components/MovieList/MovieList';
 import Button from '../../components/Button/Button';
 import Loader from '../../components/Loader/Loader';
-import { fetchRouletteMovies } from '../../redux/movie-roulette/actions';
+import { loadRouletteMovies } from '../../redux/movie-roulette/actions';
 import { fetchGenres } from '../../redux/fixtures/actions';
 import { dismissError } from '../../redux/error/actions';
 import Swal from 'sweetalert2';
@@ -28,7 +28,7 @@ class RouletteMovieList extends Component {
     const {
       moviesShown,
       moviesAll,
-      moviesLoading,
+      loadingMessage,
       genres,
       fetchMovies,
     } = this.props;
@@ -44,19 +44,19 @@ class RouletteMovieList extends Component {
          * Hides load and roll button when movies are loading
          * We also need to hide load button if we don't have more movies to load
          */}
-        {moviesLoading && moviesAll.length > moviesShown.length && (
+        {loadingMessage && moviesAll.length > moviesShown.length && (
           <div className='roulette-movie-list__loader'>
-            <Loader message='Fetching movies!' />
+            <Loader message={loadingMessage} />
           </div>
         )}
         <div className='roulette-movie-list__buttons'>
-          {!moviesLoading && (
+          {!loadingMessage && (
             <div className='roulette-movie-list__load-button'>
               <Button onClick={fetchMovies.bind(this, undefined)} text='Load' />
             </div>
           )}
           {/* We also need to load genres from the server to open "Choose genres" popup */}
-          {!moviesLoading && !!genres.length && (
+          {!loadingMessage && !!genres.length && (
             <div className='roulette-movie-list__roll-button'>
               <Button onClick={this.openGenresModal.bind(this)} text='Roll' />
             </div>
@@ -137,15 +137,11 @@ class RouletteMovieList extends Component {
 }
 
 const mapStateToProps = state => {
-  const {
-    movieList,
-    loading: moviesLoading,
-    shownMoviesCount,
-  } = state.movieRoulette;
+  const { movieList, loadingMessage, shownMoviesCount } = state.movieRoulette;
   return {
     moviesAll: movieList,
     moviesShown: movieList.slice(0, shownMoviesCount),
-    moviesLoading,
+    loadingMessage,
     genres: state.fixtures.genres,
     currentGenre: state.movieRoulette.fetchMoviesParams.with_genres,
     error: state.error,
@@ -154,7 +150,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchMovies: genre => dispatch(fetchRouletteMovies(genre)),
+    fetchMovies: genre => dispatch(loadRouletteMovies(genre)),
     fetchGenres: () => dispatch(fetchGenres()),
     dismissError: () => dispatch(dismissError()),
   };
@@ -163,7 +159,7 @@ const mapDispatchToProps = dispatch => {
 RouletteMovieList.propTypes = {
   moviesAll: PropTypes.array,
   moviesShown: PropTypes.array,
-  moviesLoading: PropTypes.bool,
+  loadingMessage: PropTypes.string,
   genres: PropTypes.array,
   fetchMovies: PropTypes.func,
   fetchGenres: PropTypes.func,

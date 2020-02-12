@@ -1,20 +1,5 @@
 import api from '../../services/api';
-
-const REQUEST_ROULETTE_MOVIES = 'REQUEST_ROULETTE_MOVIES';
-const requestRouletteMovies = () => ({
-  type: REQUEST_ROULETTE_MOVIES,
-});
-
-const RECEIVE_ROULETTE_MOVIES = 'RECEIVE_ROULETTE_MOVIES';
-function receiveRouletteMovies(movies, totalPages) {
-  return {
-    type: RECEIVE_ROULETTE_MOVIES,
-    payload: {
-      movies,
-      totalPages: totalPages,
-    },
-  };
-}
+import { API_MIDDLEWARE } from '../middlewares/api.middleware';
 
 const CHANGE_ROULETTE_MOVIES_GENRE = 'CHANGE_ROULETTE_MOVIES_GENRE';
 const changeRouletteMoviesGenre = genre => ({
@@ -23,6 +8,34 @@ const changeRouletteMoviesGenre = genre => ({
     genre,
   },
 });
+
+const ROULETTE_MOVIES_REQUEST = 'ROULETTE_MOVIES_REQUEST',
+  ROULETTE_MOVIES_SUCCESS = 'ROULETTE_MOVIES_SUCCESS',
+  ROULETTE_MOVIES_FAILURE = 'ROULETTE_MOVIES_FAILURE';
+
+const fetchRouleteMovies = pagination => ({
+  [API_MIDDLEWARE]: {
+    api: [api.movies.get_popular, pagination],
+    types: [
+      ROULETTE_MOVIES_REQUEST,
+      ROULETTE_MOVIES_SUCCESS,
+      ROULETTE_MOVIES_FAILURE,
+    ],
+    requestData: {
+      loadingMessage: 'Fetching movies...',
+    },
+  },
+});
+
+function fakeMovieSuccess(movies, totalPages) {
+  return {
+    type: ROULETTE_MOVIES_SUCCESS,
+    response: {
+      results: movies,
+      totalPages,
+    },
+  };
+}
 
 /**
  *
@@ -33,39 +46,35 @@ const changeRouletteMoviesGenre = genre => ({
  * If genre has changed, it clears old movieList and creates new one
  * If genre hasn't change, it adds new items on top of the existing list
  */
-const fetchRouletteMovies = genre => {
+const loadRouletteMovies = genre => {
   return (dispatch, getState) => {
-    const { fetchMoviesParams, totalPages } = getState().movieRoulette;
-    dispatch(requestRouletteMovies());
+    // dispatch(requestRouletteMovies());
     //Change to all genres if it receives null sp we need strickt equals to undefined
     if (genre !== undefined) {
       dispatch(changeRouletteMoviesGenre(genre));
     }
     /**
-     * Fetch pages from server only if there are more pages to fetch
-     * If not, don't fetch and act as you received empty array
+     * Fetch movies from server only if there are more pages to fetch
+     * Feched movies will be added to the states movieList array
+     * If there is no more pages, don't fetch and act as you received
+     * empty array which will also be added to states movieList
      */
-
+    const { fetchMoviesParams, totalPages } = getState().movieRoulette;
     if (!(fetchMoviesParams.page > totalPages)) {
-      return api.movies
-        .get_popular(getState().movieRoulette.fetchMoviesParams)
-        .then(response => {
-          dispatch(
-            receiveRouletteMovies(response.results, response.total_pages)
-          );
-          return response;
-        });
+      return dispatch(
+        fetchRouleteMovies(getState().movieRoulette.fetchMoviesParams)
+      );
     } else {
-      dispatch(receiveRouletteMovies([]));
+      dispatch(fakeMovieSuccess([]));
       return Promise.resolve();
     }
   };
 };
 
 export {
-  REQUEST_ROULETTE_MOVIES,
-  RECEIVE_ROULETTE_MOVIES,
   CHANGE_ROULETTE_MOVIES_GENRE,
-  fetchRouletteMovies,
-  receiveRouletteMovies,
+  ROULETTE_MOVIES_REQUEST,
+  ROULETTE_MOVIES_SUCCESS,
+  ROULETTE_MOVIES_FAILURE,
+  loadRouletteMovies,
 };

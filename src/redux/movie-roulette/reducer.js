@@ -1,7 +1,8 @@
 import {
   CHANGE_ROULETTE_MOVIES_GENRE,
-  RECEIVE_ROULETTE_MOVIES,
-  REQUEST_ROULETTE_MOVIES,
+  ROULETTE_MOVIES_REQUEST,
+  ROULETTE_MOVIES_SUCCESS,
+  ROULETTE_MOVIES_FAILURE,
   // SHOW_MORE_MOVIES,
 } from './actions';
 
@@ -30,32 +31,61 @@ const movieRoulette = (
      */
     movieList: [],
     shownMoviesCount: 0,
+    loadingMessage: null,
   },
   action
 ) => {
   switch (action.type) {
-    case REQUEST_ROULETTE_MOVIES:
+    case ROULETTE_MOVIES_REQUEST:
       return {
         ...state,
-        loading: true,
+        loadingMessage: action.loadingMessage,
       };
-    case RECEIVE_ROULETTE_MOVIES:
+    case ROULETTE_MOVIES_SUCCESS:
       const showNewCount = 6;
       return {
         ...state,
-        loading: false,
+        loadingMessage: null,
         fetchMoviesParams: {
           ...state.fetchMoviesParams,
           page: state.fetchMoviesParams.page + 1,
         },
         movieList: showMovies(
-          [...state.movieList, ...action.payload.movies],
+          [...state.movieList, ...action.response.results],
           state.shownMoviesCount,
           showNewCount
         ),
-        totalPages: action.payload.totalPages,
+        totalPages: action.response.totalPages,
         shownMoviesCount: state.shownMoviesCount + showNewCount,
       };
+    case ROULETTE_MOVIES_FAILURE:
+      return {
+        ...state,
+        loadingMessage: null,
+      };
+    // case
+    // case REQUEST_ROULETTE_MOVIES:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //   };
+    // case RECEIVE_ROULETTE_MOVIES:
+    //   const showNewCount = 6;
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     fetchMoviesParams: {
+    //       ...state.fetchMoviesParams,
+    //       page: state.fetchMoviesParams.page + 1,
+    //     },
+    //     movieList: showMovies(
+    //       [...state.movieList, ...action.payload.movies],
+    //       state.shownMoviesCount,
+    //       showNewCount
+    //     ),
+    //     totalPages: action.payload.totalPages,
+    //     shownMoviesCount: state.shownMoviesCount + showNewCount,
+    //   };
     case CHANGE_ROULETTE_MOVIES_GENRE:
       return {
         ...state,
