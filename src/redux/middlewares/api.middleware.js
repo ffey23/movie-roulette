@@ -21,36 +21,48 @@ export default state => next => action => {
     throw new Error('types must be an array of strings with the length=3');
   }
 
-  const actionWith = data => {
-    const finalAction = { ...action, ...data };
+  const actionWith = (data, dataSpecific) => {
+    const finalAction = {
+      ...action,
+      ...data,
+      ...action[API_MIDDLEWARE][dataSpecific],
+    };
     delete finalAction[API_MIDDLEWARE];
     return finalAction;
   };
 
   const [requestType, successType, failureType] = types;
-  next(actionWith({ type: requestType }));
+  next(actionWith({ type: requestType }, 'requestData'));
 
   return callApi(api).then(
     response =>
       next(
-        actionWith({
-          response,
-          type: successType,
-        })
+        actionWith(
+          {
+            response,
+            type: successType,
+          },
+          'successData'
+        )
       ),
     error => {
       const defaultTitle = 'Error';
       return next(
-        actionWith({
-          type: failureType,
-          error: {
-            message: error.response
-              ? error.response.data.status_message ||
-                error.response.data.errors[0]
-              : error.message,
-            title: error.response ? error.response.status + '!' : defaultTitle,
+        actionWith(
+          {
+            type: failureType,
+            error: {
+              message: error.response
+                ? error.response.data.status_message ||
+                  error.response.data.errors[0]
+                : error.message,
+              title: error.response
+                ? error.response.status + '!'
+                : defaultTitle,
+            },
           },
-        })
+          'failureData'
+        )
       );
     }
   );
