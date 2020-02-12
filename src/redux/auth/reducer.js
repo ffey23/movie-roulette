@@ -1,8 +1,7 @@
 import {
-  RECEIVE_LOGIN_DATA,
-  LOGOUT_SUCCESS,
-  REQUEST_TOKEN_REQUEST,
-  REQUEST_TOKEN_FAILURE,
+  SESSION_SUCCESS,
+  DELETE_SESSION_SUCCESS,
+  RETRIEVE_SESSION,
 } from './actions';
 
 const auth = (
@@ -13,28 +12,38 @@ const auth = (
   },
   action
 ) => {
+  // All failures just turns off the loading message
+  if (action.error) {
+    return {
+      ...state,
+      loadingMessage: null,
+    };
+  }
+  // All requests just turns loadingMessage with loadingMessage action in it
+  if (action.loadingMessage) {
+    return {
+      ...state,
+      loadingMessage: action.loadingMessage,
+    };
+  }
   switch (action.type) {
-    case REQUEST_TOKEN_REQUEST:
-      return {
-        ...state,
-        loadingMessage: 'Creating request token',
-      };
-    case REQUEST_TOKEN_FAILURE:
-      return {
-        ...state,
-        loadingMessage: null,
-      };
-    case RECEIVE_LOGIN_DATA:
+    case SESSION_SUCCESS:
       return {
         loggedIn: true,
-        sessionId: action.payload,
+        sessionId: action.response.session_id,
         loadingMessage: null,
       };
-    case LOGOUT_SUCCESS:
+    case DELETE_SESSION_SUCCESS:
       return {
         loggedIn: false,
         sessionId: null,
         loadingMessage: null,
+      };
+    case RETRIEVE_SESSION:
+      return {
+        ...state,
+        loggedIn: true,
+        sessionId: action.sessionId,
       };
     default:
       return state;

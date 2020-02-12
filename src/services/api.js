@@ -17,7 +17,7 @@ export default {
         redirect_to: process.env.REACT_APP_LOGIN_REDIRECT,
       });
     },
-    create_access_token(request_token) {
+    fetch_access_token(request_token) {
       return axiosV4.post('auth/access_token', {
         request_token,
       });
@@ -27,7 +27,7 @@ export default {
         access_token,
       });
     },
-    create_session_from_v4(access_token) {
+    fetch_session(access_token) {
       return axiosV3.post(
         'authentication/session/convert/4',
         {
