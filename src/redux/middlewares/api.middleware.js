@@ -12,13 +12,26 @@ export default state => next => action => {
 
   const { api, types } = action[API_MIDDLEWARE];
 
-  if (
-    !Array.isArray(types) ||
-    // eslint-disable-next-line
-    types.length != 3 ||
-    !types.every(at => typeof at == 'string')
-  ) {
-    throw new Error('types must be an array of strings with the length=3');
+  if (!Array.isArray(types)) {
+    throw new Error('types must be an array');
+  }
+
+  if (types.length !== 3) {
+    throw new Error('types must be an array with length=3');
+  }
+
+  if (!types.every(at => typeof at == 'string')) {
+    throw new Error('types must be an array of strings');
+  }
+
+  if (!Array.isArray(api)) {
+    throw new Error('api must be an array');
+  }
+
+  if (typeof api[0] != 'function') {
+    throw new Error(
+      'first element of the api array must be a function that returns promise'
+    );
   }
 
   const actionWith = (data, dataSpecific) => {
