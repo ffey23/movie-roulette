@@ -44,13 +44,13 @@ class RouletteMovieList extends Component {
          * Hides load and roll button when movies are loading
          * We also need to hide load button if we don't have more movies to load
          */}
-        {loadingMessage && moviesAll.length > moviesShown.length && (
+        {loadingMessage && (
           <div className='roulette-movie-list__loader'>
             <Loader message={loadingMessage} />
           </div>
         )}
         <div className='roulette-movie-list__buttons'>
-          {!loadingMessage && (
+          {!loadingMessage && moviesAll.length > moviesShown.length && (
             <div className='roulette-movie-list__load-button'>
               <Button onClick={fetchMovies.bind(this, undefined)} text='Load' />
             </div>
