@@ -59,7 +59,7 @@ const fetchAccessToken = requestToken => ({
   [API_MIDDLEWARE]: {
     api: [api.auth.fetch_access_token, requestToken],
     types: [ACCESS_TOKEN_REQUEST, ACCESS_TOKEN_SUCCESS, ACCESS_TOKEN_FAILURE],
-    loaderMessage: 'Logging in',
+    loaderMessage: 'Loging in...',
     stopLoaderOnSuccess: false,
   },
 });
