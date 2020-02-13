@@ -1,3 +1,4 @@
+import { startLoader, finishLoader } from '../loader/actions';
 const callApi = api => {
   const [request, ...args] = api;
   return request(...args);
@@ -5,12 +6,14 @@ const callApi = api => {
 
 export const API_MIDDLEWARE = 'API_MIDDLEWARE';
 
-export default state => next => action => {
+export default store => next => action => {
   if (!action[API_MIDDLEWARE]) {
     return next(action);
   }
 
-  const { api, types } = action[API_MIDDLEWARE];
+  const { api, types, loaderMessage, stopLoaderOnSuccess = true } = action[
+    API_MIDDLEWARE
+  ];
 
   if (!Array.isArray(types)) {
     throw new Error('types must be an array');
@@ -33,6 +36,9 @@ export default state => next => action => {
       'first element of the api array must be a function that returns promise'
     );
   }
+  if (loaderMessage != undefined && typeof loaderMessage != 'string') {
+    throw new Error('loaderMessage must be a string');
+  }
 
   const actionWith = (data, dataSpecific) => {
     const finalAction = {
@@ -43,13 +49,14 @@ export default state => next => action => {
     delete finalAction[API_MIDDLEWARE];
     return finalAction;
   };
+  loaderMessage && store.dispatch(startLoader(loaderMessage));
 
   const [requestType, successType, failureType] = types;
   next(actionWith({ type: requestType }, 'requestData'));
-
   return callApi(api).then(
-    response =>
-      next(
+    response => {
+      stopLoaderOnSuccess && store.dispatch(finishLoader());
+      return next(
         actionWith(
           {
             response,
@@ -57,8 +64,10 @@ export default state => next => action => {
           },
           'successData'
         )
-      ),
+      );
+    },
     error => {
+      store.dispatch(finishLoader());
       const defaultTitle = 'Error';
       return next(
         actionWith(
