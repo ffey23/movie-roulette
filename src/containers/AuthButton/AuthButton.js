@@ -27,17 +27,29 @@ class AuthButton extends Component {
     }
   }
 
-  render() {
+  renderNavigation() {
     const { navigate } = this.state;
+    if (!navigate) return null;
+
+    return <Redirect to={`${navigate}`} push={true} />;
+  }
+
+  renderButton() {
     const { text, loggedIn } = this.props;
+    return (
+      <Button
+        text={text}
+        onClick={loggedIn ? this.logOut.bind(this) : this.logIn.bind(this)}
+      />
+    );
+  }
+
+  render() {
     this.renderError();
     return (
       <div className='auth__button'>
-        {navigate && <Redirect to={`${navigate}`} push={true} />}
-        <Button
-          text={text}
-          onClick={loggedIn ? this.logOut.bind(this) : this.logIn.bind(this)}
-        />
+        {this.renderNavigation()}
+        {this.renderButton()}
       </div>
     );
   }
