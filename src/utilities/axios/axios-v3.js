@@ -10,7 +10,16 @@ client.defaults.params = {
   api_key: process.env.REACT_APP_API_BASE_URL,
 };
 
-client.interceptors.request.use(config => config);
+client.interceptors.request.use(config => {
+  debugger;
+  return {
+    ...config,
+    params: {
+      ...config.params,
+      api_key: process.env.REACT_APP_API_KEY,
+    },
+  };
+});
 
 client.interceptors.response.use(onResponseSuccess);
 

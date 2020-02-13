@@ -4,11 +4,7 @@ import axiosV4 from '../utilities/axios/axios-v4';
 export default {
   fixtures: {
     get_genres() {
-      return axiosV3.get('genre/movie/list', {
-        params: {
-          api_key: process.env.REACT_APP_API_KEY,
-        },
-      });
+      return axiosV3.get('genre/movie/list');
     },
   },
   auth: {
@@ -28,22 +24,13 @@ export default {
       });
     },
     fetch_session(access_token) {
-      return axiosV3.post(
-        'authentication/session/convert/4',
-        {
-          access_token,
-        },
-        {
-          params: {
-            api_key: process.env.REACT_APP_API_KEY,
-          },
-        }
-      );
+      return axiosV3.post('authentication/session/convert/4', {
+        access_token,
+      });
     },
     delete_session(session_id) {
       return axiosV3.delete('authentication/session', {
         data: { session_id },
-        params: { api_key: process.env.REACT_APP_API_KEY },
       });
     },
   },
@@ -55,14 +42,12 @@ export default {
       return axiosV3.get('movie/popular', {
         params: {
           ...params,
-          api_key: process.env.REACT_APP_API_KEY,
         },
       });
     },
     get_details(id, session_id) {
       return axiosV3.get(`movie/${id}`, {
         params: {
-          api_key: process.env.REACT_APP_API_KEY,
           append_to_response: 'account_states',
           language: 'en-US',
           session_id: session_id,
@@ -77,7 +62,6 @@ export default {
         },
         {
           params: {
-            api_key: process.env.REACT_APP_API_KEY,
             session_id: session_id,
           },
         }
