@@ -46,6 +46,10 @@ let App = ({ checkLoggedIn }) => {
             </div>
           </div>
         </footer>
+        {/* 
+          covers whole screen and blocks scroll - activate/deactivate it from 
+          anywhere in the ap via redux loader (start/finish)Loader actions 
+        */}
         <MainLoader />
       </div>
     </Router>

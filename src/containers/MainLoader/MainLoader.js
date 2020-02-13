@@ -7,8 +7,8 @@ import './MainLoader.scss';
 // Needed for conditionally show component
 class MainLoader extends Component {
   render() {
-    const { message, show } = this.props;
-    if (!show) return null;
+    const { message } = this.props;
+    if (message == null) return null;
     return (
       <div className='loader-wrapper'>
         <Loader blockScroll={true} message={message} />
@@ -24,8 +24,7 @@ MainLoader.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    message: state.loading.message,
-    show: state.loading.mainLoader,
+    message: state.loader,
   };
 };
 

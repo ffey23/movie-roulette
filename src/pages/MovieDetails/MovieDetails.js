@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { startLoading, finishLoading } from '../../redux/loading/actions';
+import { startLoader, finishLoader } from '../../redux/loader/actions';
 import api from '../../services/api';
 import Swal from 'sweetalert2';
 import Rating from 'react-rating';
 import './MovieDetails.scss';
 
-const MovieDetails = ({ startLoading, finishLoading }) => {
+const MovieDetails = ({ startLoader, finishLoader }) => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [myRating, setMyRating] = useState(0);
 
   useEffect(() => {
-    startLoading('Fetching movie!');
+    startLoader('Fetching movie!');
     api.movies
       .get_details(id, localStorage.getItem('session_id'))
       .then(
@@ -32,9 +32,9 @@ const MovieDetails = ({ startLoading, finishLoading }) => {
         }
       )
       .finally(() => {
-        finishLoading();
+        finishLoader();
       });
-  }, [id, startLoading, finishLoading]);
+  }, [id, startLoader, finishLoader]);
 
   const rate = value => {
     // Needed for later reseting to the old value on error - othervise it wouldn't rerender
@@ -113,8 +113,8 @@ const MovieDetails = ({ startLoading, finishLoading }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    startLoading: message => dispatch(startLoading(true, message)),
-    finishLoading: () => dispatch(finishLoading()),
+    startLoader: message => dispatch(startLoader(message)),
+    finishLoader: () => dispatch(finishLoader()),
   };
 };
 
