@@ -12,10 +12,21 @@ class Loader extends React.Component {
       </div>
     );
   }
+
+  componentDidMount() {
+    // Disables scroll when component is shown
+    if (this.props.blockScroll) {
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  componentWillUnmount() {
+    document.body.style.overflow = 'auto';
+  }
 }
 
 Loader.propTypes = {
   message: PropTypes.string,
-  show: PropTypes.bool,
+  blockScroll: PropTypes.bool,
 };
 export default Loader;
