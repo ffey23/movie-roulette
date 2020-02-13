@@ -31,9 +31,8 @@ const fetchRequestToken = () => ({
       REQUEST_TOKEN_SUCCESS,
       REQUEST_TOKEN_FAILURE,
     ],
-    requestData: {
-      loadingMessage: 'Fetching request token...',
-    },
+    loaderMessage: 'Fetching request token...',
+    stopLoaderOnSuccess: false,
   },
 });
 
@@ -60,9 +59,8 @@ const fetchAccessToken = requestToken => ({
   [API_MIDDLEWARE]: {
     api: [api.auth.fetch_access_token, requestToken],
     types: [ACCESS_TOKEN_REQUEST, ACCESS_TOKEN_SUCCESS, ACCESS_TOKEN_FAILURE],
-    requestData: {
-      loadingMessage: 'Loging in...',
-    },
+    loaderMessage: 'Logging in',
+    stopLoaderOnSuccess: false,
   },
 });
 
@@ -115,9 +113,7 @@ const deleteSession = sessionId => ({
       DELETE_SESSION_SUCCESS,
       DELETE_SESSION_FAILURE,
     ],
-    requestData: {
-      loadingMessage: 'Loging out...',
-    },
+    loaderMessage: 'Loging out...',
   },
 });
 

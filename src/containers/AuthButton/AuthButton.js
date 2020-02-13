@@ -6,7 +6,6 @@ import Button from '../../components/Button/Button';
 import { createRequestToken, logout } from '../../redux/auth/actions';
 import { dismissError } from '../../redux/error/actions';
 import './AuthButton.scss';
-import Loader from '../../components/Loader/Loader';
 import Swal from 'sweetalert2';
 
 class AuthButton extends Component {
@@ -15,16 +14,6 @@ class AuthButton extends Component {
     this.state = {
       navigate: null,
     };
-  }
-
-  renderLoader() {
-    const { loadingMessage } = this.props;
-    if (!loadingMessage) return null;
-    return (
-      <div className='auth-button__loader-wrapper'>
-        <Loader blockScroll={true} message={loadingMessage} />
-      </div>
-    );
   }
 
   renderError() {
@@ -49,7 +38,6 @@ class AuthButton extends Component {
           text={text}
           onClick={loggedIn ? this.logOut.bind(this) : this.logIn.bind(this)}
         />
-        {this.renderLoader()}
       </div>
     );
   }
@@ -71,7 +59,6 @@ const mapStateToProps = state => {
   return {
     loggedIn: state.auth.loggedIn,
     text: state.auth.loggedIn ? 'Logout' : 'Login',
-    loadingMessage: state.auth.loadingMessage,
     error: state.error,
   };
 };
@@ -87,7 +74,6 @@ const mapDispatchToProps = dispatch => {
 AuthButton.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   text: PropTypes.string,
-  loadingMessage: PropTypes.string,
   logout: PropTypes.func.isRequired,
   createRequestToken: PropTypes.func.isRequired,
   dismissError: PropTypes.func.isRequired,
