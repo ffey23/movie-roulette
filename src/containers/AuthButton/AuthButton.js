@@ -22,7 +22,7 @@ class AuthButton extends Component {
     if (!loadingMessage) return null;
     return (
       <div className='auth-button__loader-wrapper'>
-        <Loader message={loadingMessage} />
+        <Loader blockScroll={true} message={loadingMessage} />
       </div>
     );
   }
