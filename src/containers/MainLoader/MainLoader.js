@@ -11,17 +11,9 @@ class MainLoader extends Component {
     if (!show) return null;
     return (
       <div className='loader-wrapper'>
-        <Loader message={message} />
+        <Loader blockScroll={true} message={message} />
       </div>
     );
-  }
-  componentDidUpdate() {
-    // Disables scroll when component is shown
-    if (this.props.show) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
   }
 }
 
