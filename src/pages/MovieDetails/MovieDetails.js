@@ -13,6 +13,9 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
   const [myRating, setMyRating] = useState(0);
 
   useEffect(() => {
+    window.scroll({
+      top: 0,
+    });
     startLoader('Fetching movie!');
     api.movies
       .get_details(id, localStorage.getItem('session_id'))
@@ -95,7 +98,7 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
       },
     ];
     const renderInfos = infos.map(info => (
-      <p className='movie-details__about-info'>
+      <p className='movie-details__about-info' key={info.name}>
         <span className='movie-details__info-name'>{info.name}:</span>{' '}
         {info.content}
       </p>
