@@ -36,6 +36,8 @@ export default store => next => action => {
       'first element of the api array must be a function that returns promise'
     );
   }
+
+  // eslint-disable-next-line
   if (loaderMessage != undefined && typeof loaderMessage != 'string') {
     throw new Error('loaderMessage must be a string');
   }
