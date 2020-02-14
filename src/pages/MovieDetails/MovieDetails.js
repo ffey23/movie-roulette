@@ -59,6 +59,31 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
     );
   };
 
+  const renderBackdrop = () => (
+    <div className='movie-details__backdrop'>
+      <img
+        src={`${process.env.REACT_APP_IMAGES_BASE_URL}w500${movie.backdrop_path}`}
+        className='movie-details__image'
+        alt={`Poster for movie ${movie.original_title}`}
+      />
+      <div className='movie-details__overview'>{movie.overview}</div>
+    </div>
+  );
+
+  const renderRating = () => (
+    <div className='movie-details__rating'>
+      <Rating
+        stop={10}
+        fractions={2}
+        initialRating={myRating}
+        readonly={myRating !== 0}
+        onChange={rate}
+        emptySymbol='icon-star-empty'
+        fullSymbol='icon-star-full'
+      />
+    </div>
+  );
+
   const renderAbout = params => {
     const infos = [
       { name: 'Rating', content: movie.vote_average },
@@ -81,31 +106,13 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
   if (!movie) {
     return null;
   }
+
   return (
     <div className='movie-details'>
       <h2 className='movie-details__header'>{movie.original_title}</h2>
-      <div className='movie-details__backdrop'>
-        <img
-          src={`${process.env.REACT_APP_IMAGES_BASE_URL}w500${movie.backdrop_path}`}
-          className='movie-details__image'
-          alt={`Poster for movie ${movie.original_title}`}
-        />
-        <div className='movie-details__overview movie-details__overview'>
-          {movie.overview}
-        </div>
-      </div>
+      {renderBackdrop()}
       <div className='movie-details__bottom'>
-        <div className='movie-details__rating'>
-          <Rating
-            stop={10}
-            fractions={2}
-            initialRating={myRating}
-            readonly={myRating !== 0}
-            onChange={rate}
-            emptySymbol='icon-star-empty'
-            fullSymbol='icon-star-full'
-          />
-        </div>
+        {renderRating()}
         {renderAbout()}
       </div>
     </div>
