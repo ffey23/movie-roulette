@@ -118,9 +118,9 @@ class RouletteMovieList extends Component {
   }
 
   fetchMovies(genreId) {
-    const { fetchMovies } = this.props;
+    const { loadRouletteMovies } = this.props;
 
-    fetchMovies(genreId).catch(err => {
+    loadRouletteMovies(genreId).catch(err => {
       Swal.fire({
         icon: 'error',
         title: 'Something went wrong!',
@@ -134,7 +134,7 @@ class RouletteMovieList extends Component {
   }
 
   openGenresModal() {
-    const { genres, currentGenre, fetchMovies } = this.props;
+    const { genres, currentGenre } = this.props;
     let inputOptions = genres.reduce(
       (total, current) => ({
         ...total,
@@ -181,7 +181,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchMovies: genre => dispatch(loadRouletteMovies(genre)),
+    loadRouletteMovies: genre => dispatch(loadRouletteMovies(genre)),
     fetchGenres: () => dispatch(fetchGenres()),
     dismissError: () => dispatch(dismissError()),
   };
@@ -192,7 +192,7 @@ RouletteMovieList.propTypes = {
   moviesShown: PropTypes.array,
   loadingMessage: PropTypes.string,
   genres: PropTypes.array,
-  fetchMovies: PropTypes.func,
+  loadRouletteMovies: PropTypes.func,
   fetchGenres: PropTypes.func,
   dismissErrorMessage: PropTypes.func,
   currentGenre: PropTypes.number,

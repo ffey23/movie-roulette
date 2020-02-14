@@ -17,16 +17,19 @@ const Home = ({ location, loggedIn, login }) => {
       setNav('/');
     });
   }
+
+  const renderRedirect = () => nav && <Redirect to={nav} />;
+
+  const renderPage = () => {
+    if (loggedIn) return <RouletteMovieList />;
+
+    return <Landing />;
+  };
+
   return (
     <div className='home'>
-      {nav && <Redirect to={nav} />}
-      {loggedIn ? (
-        <div>
-          <RouletteMovieList />
-        </div>
-      ) : (
-        <Landing />
-      )}
+      {renderRedirect()}
+      {renderPage()}
     </div>
   );
 };
