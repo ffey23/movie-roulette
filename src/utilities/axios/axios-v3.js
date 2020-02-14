@@ -11,7 +11,6 @@ client.defaults.params = {
 };
 
 client.interceptors.request.use(config => {
-  debugger;
   return {
     ...config,
     params: {
