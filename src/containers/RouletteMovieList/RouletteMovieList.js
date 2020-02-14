@@ -120,13 +120,22 @@ class RouletteMovieList extends Component {
   fetchMovies(genreId) {
     const { loadRouletteMovies } = this.props;
 
-    loadRouletteMovies(genreId).catch(err => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Something went wrong!',
-        text: 'Unable to load movies!',
+    loadRouletteMovies(genreId)
+      .then(() => {
+        // If genre is changed scroll to top
+        if (genreId) {
+          window.scroll({
+            top: 0,
+          });
+        }
+      })
+      .catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Something went wrong!',
+          text: 'Unable to load movies!',
+        });
       });
-    });
   }
 
   loadMoviesHandler() {
