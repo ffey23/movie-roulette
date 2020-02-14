@@ -46,7 +46,7 @@ class RouletteMovieList extends Component {
   }
 
   renderLoadButton() {
-    const { loadingMessage, moviesAll, moviesShown, fetchMovies } = this.props;
+    const { loadingMessage, moviesAll, moviesShown } = this.props;
 
     // when loading we see a loader instead of buttons
     // moviesAll.lenght <= moviesShown.lenght tell us that there is no more movies to load -reducer logic
@@ -55,7 +55,7 @@ class RouletteMovieList extends Component {
     }
     return (
       <div className='roulette-movie-list__load-button'>
-        <Button onClick={fetchMovies.bind(this, undefined)} text='Load' />
+        <Button onClick={this.loadMoviesHandler.bind(this)} text='Load' />
       </div>
     );
   }
@@ -90,39 +90,47 @@ class RouletteMovieList extends Component {
   }
 
   componentDidMount() {
-    const {
-      fetchMovies,
-      fetchGenres,
-      genres,
-      moviesAll,
-      dismissError,
-    } = this.props;
+    const { moviesAll } = this.props;
 
-    // We fetches genres only if we already dont have them loaded
-    genres.length ||
-      fetchGenres()
-        // override default error message to more user friendly
-        // letting user know that everything works except roll feature
-        .then(result => {
-          dismissError();
-          if (result.error) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text:
-                'Everything works but roll feature is missing! Try to reload the page!',
-            });
-          }
-        });
+    this.fetchGenres();
+
     // We prevent fetching new movies if someone goes back to this page from movie-details
-    moviesAll.length ||
-      fetchMovies().catch(err => {
+    if (!moviesAll.length) this.fetchMovies();
+  }
+
+  fetchGenres() {
+    const { genres, fetchGenres, dismissError } = this.props;
+
+    // Prevents fetching genres if already loaded
+    if (genres.length) return;
+
+    fetchGenres().then(result => {
+      dismissError();
+      if (result.error) {
         Swal.fire({
           icon: 'error',
-          title: 'Something went wrong!',
-          text: 'Unable to load movies!',
+          title: 'Error',
+          text:
+            'Everything works but roll feature is missing! Try to reload the page!',
         });
+      }
+    });
+  }
+
+  fetchMovies(genreId) {
+    const { fetchMovies } = this.props;
+
+    fetchMovies(genreId).catch(err => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Something went wrong!',
+        text: 'Unable to load movies!',
       });
+    });
+  }
+
+  loadMoviesHandler() {
+    this.fetchMovies();
   }
 
   openGenresModal() {
@@ -153,7 +161,7 @@ class RouletteMovieList extends Component {
       else {
         // eslint-disable-next-line
         const genreId = result.value == '0' ? null : +result.value;
-        fetchMovies(genreId);
+        this.fetchMovies(genreId);
       }
     });
   }
