@@ -58,6 +58,26 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
       }
     );
   };
+
+  const renderAbout = params => {
+    const infos = [
+      { name: 'Rating', content: movie.vote_average },
+      { name: 'Popularity', content: movie.popularity },
+      { name: 'Language', content: movie.original_language },
+      {
+        name: 'Production Companies',
+        content: movie.production_companies.map(c => c.name).join(', '),
+      },
+    ];
+    const renderInfos = infos.map(info => (
+      <p className='movie-details__about-info'>
+        <span className='movie-details__info-name'>{info.name}:</span>{' '}
+        {info.content}
+      </p>
+    ));
+    return <div className='movie-details__about'>{renderInfos}</div>;
+  };
+
   if (!movie) {
     return null;
   }
@@ -86,26 +106,7 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
             fullSymbol='icon-star-full'
           />
         </div>
-        <div className='movie-details__about'>
-          <p className='movie-details__about-info'>
-            <span className='movie-details__info-name'>Rating:</span>{' '}
-            {movie.vote_average}
-          </p>
-          <p className='movie-details__about-info'>
-            <span className='movie-details__info-name'>Popularity:</span>{' '}
-            {movie.popularity}
-          </p>
-          <p className='movie-details__about-info'>
-            <span className='movie-details__info-name'>Language:</span>{' '}
-            {movie.original_language}
-          </p>
-          <p className='movie-details__about-info'>
-            <span className='movie-details__info-name'>
-              Production companies:
-            </span>{' '}
-            {movie.production_companies.map(c => c.name).join(', ')}
-          </p>
-        </div>
+        {renderAbout()}
       </div>
     </div>
   );
