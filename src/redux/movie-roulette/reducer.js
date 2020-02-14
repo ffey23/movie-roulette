@@ -42,6 +42,7 @@ const movieRoulette = (
         loadingMessage: action.loadingMessage,
       };
     case ROULETTE_MOVIES_SUCCESS:
+      // variable telling how many new movies will we see on each load
       const showNewCount = 6;
       return {
         ...state,
@@ -50,6 +51,7 @@ const movieRoulette = (
           ...state.fetchMoviesParams,
           page: state.fetchMoviesParams.page + 1,
         },
+        // reordering movie list which will in combination with shownMoviesCount give the illusion of randomness
         movieList: showMovies(
           [...state.movieList, ...action.response.results],
           state.shownMoviesCount,
