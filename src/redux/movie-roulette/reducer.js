@@ -63,29 +63,6 @@ const movieRoulette = (
         ...state,
         loadingMessage: null,
       };
-    // case
-    // case REQUEST_ROULETTE_MOVIES:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-    // case RECEIVE_ROULETTE_MOVIES:
-    //   const showNewCount = 6;
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     fetchMoviesParams: {
-    //       ...state.fetchMoviesParams,
-    //       page: state.fetchMoviesParams.page + 1,
-    //     },
-    //     movieList: showMovies(
-    //       [...state.movieList, ...action.payload.movies],
-    //       state.shownMoviesCount,
-    //       showNewCount
-    //     ),
-    //     totalPages: action.payload.totalPages,
-    //     shownMoviesCount: state.shownMoviesCount + showNewCount,
-    //   };
     case CHANGE_ROULETTE_MOVIES_GENRE:
       return {
         ...state,
