@@ -24,43 +24,66 @@ class RouletteMovieList extends Component {
     }
   }
 
-  render() {
-    const {
-      moviesShown,
-      moviesAll,
-      loadingMessage,
-      genres,
-      fetchMovies,
-    } = this.props;
+  renderLoader() {
+    const { loadingMessage } = this.props;
+    if (!loadingMessage) return null;
 
+    return (
+      <div className='roulette-movie-list__loader'>
+        <Loader message={loadingMessage} />
+      </div>
+    );
+  }
+
+  renderMovieList() {
+    const { moviesShown } = this.props;
+
+    return (
+      <div className='roulette-movie-list__movie-list'>
+        <MovieList movies={moviesShown} />
+      </div>
+    );
+  }
+
+  renderLoadButton() {
+    const { loadingMessage, moviesAll, moviesShown, fetchMovies } = this.props;
+
+    // when loading we see a loader instead of buttons
+    // moviesAll.lenght <= moviesShown.lenght tell us that there is no more movies to load -reducer logic
+    if (loadingMessage || moviesAll.length <= moviesShown.length) {
+      return null;
+    }
+    return (
+      <div className='roulette-movie-list__load-button'>
+        <Button onClick={fetchMovies.bind(this, undefined)} text='Load' />
+      </div>
+    );
+  }
+
+  renderRollButton() {
+    const { genres, loadingMessage } = this.props;
+
+    // when loading we see a loader instead of buttons
+    // when no genres, we can still see the page, but we don't have genres functionality
+    if (loadingMessage || !genres.length) return null;
+
+    return (
+      <div className='roulette-movie-list__roll-button'>
+        <Button onClick={this.openGenresModal.bind(this)} text='Roll' />
+      </div>
+    );
+  }
+
+  render() {
     this.renderError();
 
     return (
       <div className='roulette-movie-list'>
-        <div className='roulette-movie-list__movie-list'>
-          <MovieList movies={moviesShown} />
-        </div>
-        {/*
-         * Hides load and roll button when movies are loading
-         * We also need to hide load button if we don't have more movies to load
-         */}
-        {loadingMessage && (
-          <div className='roulette-movie-list__loader'>
-            <Loader message={loadingMessage} />
-          </div>
-        )}
+        {this.renderMovieList()}
+        {this.renderLoader()}
         <div className='roulette-movie-list__buttons'>
-          {!loadingMessage && moviesAll.length > moviesShown.length && (
-            <div className='roulette-movie-list__load-button'>
-              <Button onClick={fetchMovies.bind(this, undefined)} text='Load' />
-            </div>
-          )}
-          {/* We also need to load genres from the server to open "Choose genres" popup */}
-          {!loadingMessage && !!genres.length && (
-            <div className='roulette-movie-list__roll-button'>
-              <Button onClick={this.openGenresModal.bind(this)} text='Roll' />
-            </div>
-          )}
+          {this.renderLoadButton()}
+          {this.renderRollButton()}
         </div>
       </div>
     );
