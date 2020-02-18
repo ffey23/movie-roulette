@@ -1,20 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import RatingDisplay from '../RatingDisplay/RatingDisplay';
 import styled from 'styled-components';
 import { colors } from '../../styled/variables';
 import { fromMd, fromLg } from '../../styled/mixins';
 
 const MovieItem = ({ movie }) => {
-  const [navigation, setNavigation] = useState(null);
-  const navigateToMovie = params => {
-    setNavigation(true);
-  };
-
-  if (navigation)
-    return <Redirect to={`movie-details/${movie.id}`} push={true} />;
-
   const Wrapper = styled.div`
     // Needed for rating positioning
     position: relative;
@@ -74,26 +66,27 @@ const MovieItem = ({ movie }) => {
     white-space: nowrap;
     overflow: hidden;
   `;
-
   const InfoText = styled.p``;
 
   return (
-    <Wrapper onClick={navigateToMovie}>
-      <ImageWrapper>
-        <Image
-          src={`${process.env.REACT_APP_IMAGES_BASE_URL}w300/${movie.poster_path}`}
-          alt={`Poster for movie ${movie.original_title}`}
-        />
-      </ImageWrapper>
-      <RatingDisplayWrapper>
-        <RatingDisplay rating={movie.vote_average} />
-      </RatingDisplayWrapper>
-      <Info>
-        <InfoTitle title={movie.original_title}>
-          {movie.original_title} ({movie.release_date.slice(0, 4)})
-        </InfoTitle>
-        <InfoText>Language: {movie.original_language}</InfoText>
-      </Info>
+    <Wrapper>
+      <Link to={`movie-details/${movie.id}`}>
+        <ImageWrapper>
+          <Image
+            src={`${process.env.REACT_APP_IMAGES_BASE_URL}w300/${movie.poster_path}`}
+            alt={`Poster for movie ${movie.original_title}`}
+          />
+        </ImageWrapper>
+        <RatingDisplayWrapper>
+          <RatingDisplay rating={movie.vote_average} />
+        </RatingDisplayWrapper>
+        <Info>
+          <InfoTitle title={movie.original_title}>
+            {movie.original_title} ({movie.release_date.slice(0, 4)})
+          </InfoTitle>
+          <InfoText>Language: {movie.original_language}</InfoText>
+        </Info>
+      </Link>
     </Wrapper>
   );
 };
