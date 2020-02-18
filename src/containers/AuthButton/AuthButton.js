@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Button from '../../components/Button/Button';
+import ButtonRaw from '../../components/Button/Button';
 import { createRequestToken, logout } from '../../redux/auth/actions';
 import { dismissError } from '../../redux/error/actions';
-import './AuthButton.scss';
 import Swal from 'sweetalert2';
+import styled from 'styled-components';
 
 class AuthButton extends Component {
   constructor(props) {
@@ -35,7 +35,10 @@ class AuthButton extends Component {
   }
 
   renderButton() {
-    const { text, loggedIn } = this.props;
+    const { text, loggedIn, styles } = this.props;
+    const Button = styled(ButtonRaw)`
+      ${styles}
+    `;
     return (
       <Button
         text={text}
@@ -46,12 +49,7 @@ class AuthButton extends Component {
 
   render() {
     this.renderError();
-    return (
-      <div className='auth__button'>
-        {this.renderNavigation()}
-        {this.renderButton()}
-      </div>
-    );
+    return this.renderNavigation() || this.renderButton();
   }
 
   /**
@@ -90,6 +88,7 @@ AuthButton.propTypes = {
   createRequestToken: PropTypes.func.isRequired,
   dismissError: PropTypes.func.isRequired,
   error: PropTypes.object,
+  css: PropTypes.string,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthButton);
