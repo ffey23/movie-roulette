@@ -24,9 +24,7 @@ const RatingDisplay = ({ rating }) => {
       <StarWrapper>
         <Star className='icon-star-full'></Star>
       </StarWrapper>
-      <RatingNumber className='rating-display__number'>
-        {rating.toFixed(1)}
-      </RatingNumber>
+      <RatingNumber>{rating.toFixed(1)}</RatingNumber>
     </Wrapper>
   );
 };
