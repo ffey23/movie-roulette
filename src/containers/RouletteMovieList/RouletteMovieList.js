@@ -2,13 +2,14 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MovieList from '../../components/MovieList/MovieList';
-import Button from '../../components/Button/Button';
 import Loader from '../../components/Loader/Loader';
 import { loadRouletteMovies } from '../../redux/movie-roulette/actions';
 import { fetchGenres } from '../../redux/fixtures/actions';
 import { dismissError } from '../../redux/error/actions';
 import Swal from 'sweetalert2';
 import './RouletteMovieList.scss';
+import styled from 'styled-components';
+import BottomButtons from './BottomButtons';
 
 class RouletteMovieList extends Component {
   renderError() {
@@ -27,64 +28,47 @@ class RouletteMovieList extends Component {
   renderLoader() {
     const { loadingMessage } = this.props;
     if (!loadingMessage) return null;
-
-    return (
-      <div className='roulette-movie-list__loader'>
-        <Loader message={loadingMessage} />
-      </div>
-    );
+    return <Loader message={loadingMessage} />;
   }
 
   renderMovieList() {
     const { moviesShown } = this.props;
-
-    return (
-      <div className='roulette-movie-list__movie-list'>
-        <MovieList movies={moviesShown} />
-      </div>
-    );
+    return <MovieList movies={moviesShown} />;
   }
 
-  renderLoadButton() {
-    const { loadingMessage, moviesAll, moviesShown } = this.props;
+  renderBottomButtons() {
+    const { loadingMessage, genres, moviesAll, moviesShown } = this.props;
 
-    // when loading we see a loader instead of buttons
+    // when no genres, we can still see the page, but we don't have roll functionality
+    const showRollButton = !loadingMessage && !!genres.length;
+
     // moviesAll.lenght <= moviesShown.lenght tell us that there is no more movies to load -reducer logic
-    if (loadingMessage || moviesAll.length <= moviesShown.length) {
-      return null;
-    }
+    const showLoadButton =
+      !loadingMessage && moviesAll.length > moviesShown.length;
     return (
-      <div className='roulette-movie-list__load-button'>
-        <Button onClick={this.loadMoviesHandler.bind(this)} text='Load' />
-      </div>
-    );
-  }
-
-  renderRollButton() {
-    const { genres, loadingMessage } = this.props;
-
-    // when loading we see a loader instead of buttons
-    // when no genres, we can still see the page, but we don't have genres functionality
-    if (loadingMessage || !genres.length) return null;
-
-    return (
-      <div className='roulette-movie-list__roll-button'>
-        <Button onClick={this.openGenresModal.bind(this)} text='Roll' />
-      </div>
+      <BottomButtons
+        showLoadButton={showLoadButton}
+        showRollButton={showRollButton}
+        handleLoadButton={this.loadMoviesHandler.bind(this)}
+        handleRollButton={this.openGenresModal.bind(this)}
+      />
     );
   }
 
   render() {
+    const { moviesShown } = this.props;
     this.renderError();
 
+    const MovieListWrapper = styled.div`
+      margin-bottom: 25px;
+    `;
     return (
-      <div className='roulette-movie-list'>
-        {this.renderMovieList()}
+      <div>
+        <MovieListWrapper>
+          <MovieList movies={moviesShown} />
+        </MovieListWrapper>
         {this.renderLoader()}
-        <div className='roulette-movie-list__buttons'>
-          {this.renderLoadButton()}
-          {this.renderRollButton()}
-        </div>
+        {this.renderBottomButtons()}
       </div>
     );
   }
@@ -207,4 +191,5 @@ RouletteMovieList.propTypes = {
   currentGenre: PropTypes.number,
   error: PropTypes.object,
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(RouletteMovieList);
