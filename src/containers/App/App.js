@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { checkLoggedIn } from '../../redux/auth/actions';
-import 'normalize.css';
-import './App.scss';
 import MainLoader from '../MainLoader/MainLoader';
 import PropTypes from 'prop-types';
 import Header from './Header';
