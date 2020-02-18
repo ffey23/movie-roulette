@@ -3,11 +3,25 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from '../../pages/Home/Home';
 import MovieDetails from '../../pages/MovieDetails/MovieDetails';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import styled from 'styled-components';
+import { contentContainer } from './styled/mixins';
+import { fromLg } from '../../styled/mixins';
 
-function MainRoutes(props) {
+function Main() {
+  const MainWrapper = styled.main`
+    background-color: $c-neutral-light;
+    min-height: calc(100vh - 44px);
+    ${fromLg(`
+      min-height: calc(100vh - 80px);
+    `)}
+  `;
+
+  const Content = styled.div`
+    ${contentContainer()}
+  `;
   return (
-    <main className='App__main'>
-      <div className='App__container'>
+    <MainWrapper>
+      <Content>
         <Router>
           <Switch>
             <ProtectedRoute
@@ -17,9 +31,9 @@ function MainRoutes(props) {
             <Route path='/' component={Home} />
           </Switch>
         </Router>
-      </div>
-    </main>
+      </Content>
+    </MainWrapper>
   );
 }
 
-export default MainRoutes;
+export default Main;

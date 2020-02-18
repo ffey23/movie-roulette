@@ -6,7 +6,7 @@ import './App.scss';
 import MainLoader from '../MainLoader/MainLoader';
 import PropTypes from 'prop-types';
 import Header from './Header';
-import MainRoutes from './MainRoutes';
+import Main from './Main';
 import Footer from './Footer';
 
 let App = ({ checkLoggedIn }) => {
@@ -14,7 +14,7 @@ let App = ({ checkLoggedIn }) => {
   return (
     <div className='App'>
       <Header />
-      <MainRoutes />
+      <Main />
       <Footer />
       {/* 
         covers whole screen and blocks scroll - activate/deactivate it from 
