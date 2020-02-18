@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import RatingDisplay from '../RatingDisplay/RatingDisplay';
+import RatingDisplay from './RatingDisplay';
 import styled from 'styled-components';
 import { colors } from '../../styled/variables';
 import { fromMd, fromLg } from '../../styled/mixins';
