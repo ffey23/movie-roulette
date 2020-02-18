@@ -3,7 +3,7 @@ import AuthButton from '../AuthButton/AuthButton';
 import styled from 'styled-components';
 import { colors } from '../../styled/variables';
 import { fromLg } from '../../styled/mixins';
-import { contentContainer } from './Styled/mixins';
+import { contentContainer } from './styled/mixins';
 
 const Header = () => {
   const HeaderWrapper = styled.header`
@@ -23,14 +23,39 @@ const Header = () => {
     align-items: center;
   `;
 
+  const Title = styled.h1``;
+
+  const SmallTitle = styled.span`
+    ${fromLg(`
+        display: none;
+      `)}
+  `;
+
+  const BigTitle = styled.span`
+    display: none;
+    ${fromLg(`
+        display: block;
+      `)}
+  `;
+
+  const authButtonStyles = `
+    border: 1px solid #000;
+    height: 30px;
+    width: 90px;
+    background-color: ${colors.primaryLight};
+    color: ${colors.primaryText};
+    font-weight: bold;
+  `;
+
   return (
     <HeaderWrapper>
       <Content>
-        <h1 className='App__title'>
-          <span className='App__title--big'>Movie Roulette</span>
-          <span className='App__title--small'>MR</span>
-        </h1>
-        <AuthButton />
+        <Title>
+          {/* We need different title for small and big screens */}
+          <BigTitle>Movie Roulette</BigTitle>
+          <SmallTitle>MR</SmallTitle>
+        </Title>
+        <AuthButton styles={authButtonStyles} />
       </Content>
     </HeaderWrapper>
   );
