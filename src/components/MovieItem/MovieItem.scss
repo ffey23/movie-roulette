@@ -38,16 +38,7 @@
 }
 
 .movie-item__image {
-    width: 100%;
-    @include fromMd {
-        width: 50px;
-    }
-    // 1
-    @include fromLg {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-    }
+    
 }
 
 .movie-item__info {
