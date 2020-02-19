@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MovieItem from './MovieItem';
 import styled from 'styled-components';
-import { fromLg } from '../../styled/mixins';
+import { fromLg } from '@/styled/mixins';
 
 const MovieList = ({ movies }) => {
   const Wrapper = styled.div`

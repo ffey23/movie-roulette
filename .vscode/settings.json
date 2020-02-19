@@ -24,5 +24,6 @@
             "icon": "issue-opened",
             "foreground": "red",
         }
-    }
+    },
+    "javascript.preferences.importModuleSpecifier": "non-relative"
 }

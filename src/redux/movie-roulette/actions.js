@@ -1,4 +1,4 @@
-import api from '../../services/api';
+import api from '@/services/api';
 import { API_MIDDLEWARE } from '../middlewares/api.middleware';
 
 const CHANGE_ROULETTE_MOVIES_GENRE = 'CHANGE_ROULETTE_MOVIES_GENRE';

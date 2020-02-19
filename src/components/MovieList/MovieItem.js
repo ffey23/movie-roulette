@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import RatingDisplay from './RatingDisplay';
 import styled from 'styled-components';
-import { colors } from '../../styled/variables';
-import { fromMd, fromLg } from '../../styled/mixins';
+import { colors } from '@/styled/variables';
+import { fromMd, fromLg } from '@/styled/mixins';
 
 const MovieItem = ({ movie }) => {
   const [navigation, setNavigation] = useState(null);

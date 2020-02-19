@@ -1,10 +1,10 @@
 import React from 'react';
-import { ReactComponent as Suggestion } from '../../assets/images/suggestion.svg';
-import { ReactComponent as EmptyStar } from '../../assets/images/star-empty.svg';
-import { ReactComponent as Details } from '../../assets/images/details.svg';
+import { ReactComponent as Suggestion } from '@/assets/images/suggestion.svg';
+import { ReactComponent as EmptyStar } from '@/assets/images/star-empty.svg';
+import { ReactComponent as Details } from '@/assets/images/details.svg';
 import styled from 'styled-components';
-import { fromMd, fromLg } from '../../styled/mixins';
-import { colors } from '../../styled/variables';
+import { fromMd, fromLg } from '@/styled/mixins';
+import { colors } from '@/styled/variables';
 import Feature from './Feature';
 
 const Wrapper = styled.div`

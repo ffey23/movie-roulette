@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { colors } from '../../styled/variables';
+import { colors } from '@/styled/variables';
 
 function Feature({ text, SvgImage }) {
   const Wrapper = styled.div`

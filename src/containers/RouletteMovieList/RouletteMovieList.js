@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import MovieList from '../../components/MovieList/MovieList';
-import Loader from '../../components/Loader/Loader';
-import { loadRouletteMovies } from '../../redux/movie-roulette/actions';
-import { fetchGenres } from '../../redux/fixtures/actions';
-import { dismissError } from '../../redux/error/actions';
+import MovieList from '@/components/MovieList/MovieList';
+import Loader from '@/components/Loader/Loader';
+import { loadRouletteMovies } from '@/redux/movie-roulette/actions';
+import { fetchGenres } from '@/redux/fixtures/actions';
+import { dismissError } from '@/redux/error/actions';
 import Swal from 'sweetalert2';
 import './RouletteMovieList.scss';
 import styled from 'styled-components';

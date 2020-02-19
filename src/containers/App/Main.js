@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from '../../pages/Home/Home';
-import MovieDetails from '../../pages/MovieDetails/MovieDetails';
+import Home from '@/pages/Home/Home';
+import MovieDetails from '@/pages/MovieDetails/MovieDetails';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import styled from 'styled-components';
 import { contentContainer } from './styled/mixins';
-import { fromLg } from '../../styled/mixins';
+import { fromLg } from '@/styled/mixins';
 
 function Main() {
   const MainWrapper = styled.main`

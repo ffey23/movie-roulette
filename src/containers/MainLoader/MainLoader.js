@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Loader from '../../components/Loader/Loader';
-import './MainLoader.scss';
+import Loader from '@/components/Loader/Loader';
 
 // Needed for conditionally show component
 class MainLoader extends Component {

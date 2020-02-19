@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import RouletteMovieList from '../../containers/RouletteMovieList/RouletteMovieList';
-import Landing from '../../components/Landing/Landing';
-import { login } from '../../redux/auth/actions';
+import RouletteMovieList from '@/containers/RouletteMovieList/RouletteMovieList';
+import Landing from '@/components/Landing/Landing';
+import { login } from '@/redux/auth/actions';
 
 const Home = ({ location, loggedIn, login }) => {
   const [nav, setNav] = useState(null);

@@ -1,4 +1,4 @@
-import { breakpoints } from '../../../styled/variables';
+import { breakpoints } from '@/styled/variables';
 
 const contentContainer = () => `
     max-width: ${breakpoints.lg};

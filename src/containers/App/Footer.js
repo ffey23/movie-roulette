@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as MdbLogo } from '../../assets/images/movie-db-logo.svg';
+import { ReactComponent as MdbLogo } from '@/assets/images/movie-db-logo.svg';
 import { contentContainer } from './styled/mixins';
 import styled from 'styled-components';
 

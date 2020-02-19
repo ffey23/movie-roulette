@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import ButtonRaw from '../../components/Button/Button';
-import { createRequestToken, logout } from '../../redux/auth/actions';
-import { dismissError } from '../../redux/error/actions';
+import ButtonRaw from '@/components/Button/Button';
+import { createRequestToken, logout } from '@/redux/auth/actions';
+import { dismissError } from '@/redux/error/actions';
 import Swal from 'sweetalert2';
 import styled from 'styled-components';
 

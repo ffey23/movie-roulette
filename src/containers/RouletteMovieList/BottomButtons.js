@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import ButtonSkeleton from '../../components/Button/Button';
-import { fromLg, fromMd } from '../../styled/mixins';
+import ButtonSkeleton from '@/components/Button/Button';
+import { fromLg, fromMd } from '@/styled/mixins';
 import PropTypes from 'prop-types';
 
 function BottomButtons({

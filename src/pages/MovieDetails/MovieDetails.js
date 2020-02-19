@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { startLoader, finishLoader } from '../../redux/loader/actions';
-import api from '../../services/api';
+import { startLoader, finishLoader } from '@/redux/loader/actions';
+import api from '@/services/api';
 import Swal from 'sweetalert2';
 import Rating from 'react-rating';
 import './MovieDetails.scss';

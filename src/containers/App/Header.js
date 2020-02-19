@@ -1,8 +1,8 @@
 import React from 'react';
 import AuthButton from '../AuthButton/AuthButton';
 import styled from 'styled-components';
-import { colors } from '../../styled/variables';
-import { fromLg } from '../../styled/mixins';
+import { colors } from '@/styled/variables';
+import { fromLg } from '@/styled/mixins';
 import { contentContainer } from './styled/mixins';
 
 const Header = () => {
