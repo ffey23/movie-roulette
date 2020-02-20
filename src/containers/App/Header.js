@@ -6,7 +6,7 @@ import { fromLg } from '@/styled/mixins';
 import { contentContainer } from './styled/mixins';
 
 const Header = () => {
-  const HeaderWrapper = styled.header`
+  const Wrapper = styled.header`
     height: 44px;
     background-color: ${colors.primary};
     color: ${colors.primaryText};
@@ -48,7 +48,7 @@ const Header = () => {
   `;
 
   return (
-    <HeaderWrapper>
+    <Wrapper>
       <Content>
         <Title>
           {/* We need different title for small and big screens */}
@@ -57,7 +57,7 @@ const Header = () => {
         </Title>
         <AuthButton styles={authButtonStyles} />
       </Content>
-    </HeaderWrapper>
+    </Wrapper>
   );
 };
 

@@ -4,7 +4,7 @@ import { contentContainer } from './styled/mixins';
 import styled from 'styled-components';
 
 function Footer() {
-  const FooterWrapper = styled.footer``;
+  const Wrapper = styled.footer``;
 
   const Content = styled.div`
     ${contentContainer()}
@@ -25,7 +25,7 @@ function Footer() {
   `;
 
   return (
-    <FooterWrapper>
+    <Wrapper>
       <Content>
         <LinkList>
           <Anchor href='https://icons8.com/icon/W71PIW3yxyeJ/roulette'>
@@ -36,7 +36,7 @@ function Footer() {
           <MdbLogo />
         </LogoWrapper>
       </Content>
-    </FooterWrapper>
+    </Wrapper>
   );
 }
 

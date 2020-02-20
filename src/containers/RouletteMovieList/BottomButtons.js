@@ -10,7 +10,7 @@ function BottomButtons({
   handleLoadButton,
   handleRollButton,
 }) {
-  const ButtonsWrapper = styled.div`
+  const Wrapper = styled.div`
     position: relative;
     ${fromMd(`display: flex;`)}
   `;
@@ -78,10 +78,10 @@ function BottomButtons({
   };
 
   return (
-    <ButtonsWrapper>
+    <Wrapper>
       {renderLoadButton()}
       {renderRollButton()}
-    </ButtonsWrapper>
+    </Wrapper>
   );
 }
 

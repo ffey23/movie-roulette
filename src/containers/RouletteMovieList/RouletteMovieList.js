@@ -59,17 +59,18 @@ class RouletteMovieList extends Component {
     const { moviesShown } = this.props;
     this.renderError();
 
+    const Wrapper = styled.div``;
     const MovieListWrapper = styled.div`
       margin-bottom: 25px;
     `;
     return (
-      <div>
+      <Wrapper>
         <MovieListWrapper>
           <MovieList movies={moviesShown} />
         </MovieListWrapper>
         {this.renderLoader()}
         {this.renderBottomButtons()}
-      </div>
+      </Wrapper>
     );
   }
 

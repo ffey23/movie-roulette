@@ -8,7 +8,7 @@ import { contentContainer } from './styled/mixins';
 import { fromLg } from '@/styled/mixins';
 
 function Main() {
-  const MainWrapper = styled.main`
+  const Wrapper = styled.main`
     background-color: $c-neutral-light;
     min-height: calc(100vh - 44px);
     ${fromLg(`
@@ -20,7 +20,7 @@ function Main() {
     ${contentContainer()}
   `;
   return (
-    <MainWrapper>
+    <Wrapper>
       <Content>
         <Router>
           <Switch>
@@ -32,7 +32,7 @@ function Main() {
           </Switch>
         </Router>
       </Content>
-    </MainWrapper>
+    </Wrapper>
   );
 }
 

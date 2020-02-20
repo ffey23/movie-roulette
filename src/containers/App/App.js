@@ -6,11 +6,13 @@ import PropTypes from 'prop-types';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import styled from 'styled-components';
 
 let App = ({ checkLoggedIn }) => {
   checkLoggedIn();
+  const Wrapper = styled.div``;
   return (
-    <div className='App'>
+    <Wrapper>
       <Header />
       <Main />
       <Footer />
@@ -19,7 +21,7 @@ let App = ({ checkLoggedIn }) => {
         anywhere in the ap via redux loader (start/finish)Loader actions 
       */}
       <MainLoader />
-    </div>
+    </Wrapper>
   );
 };
 
