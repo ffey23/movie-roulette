@@ -5,7 +5,10 @@ import { startLoader, finishLoader } from '@/redux/loader/actions';
 import api from '@/services/api';
 import Swal from 'sweetalert2';
 import Rating from 'react-rating';
-import './MovieDetails.scss';
+import styled from 'styled-components';
+import { fromLg } from '@/styled/mixins';
+import Backdrop from './Backdrop';
+import InfoList from '@/pages/MovieDetails/InfoList';
 
 const MovieDetails = ({ startLoader, finishLoader }) => {
   const { id } = useParams();
@@ -62,63 +65,67 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
     );
   };
 
-  const renderBackdrop = () => (
-    <div className='movie-details__backdrop'>
-      <img
-        src={`${process.env.REACT_APP_IMAGES_BASE_URL}w500${movie.backdrop_path}`}
-        className='movie-details__image'
-        alt={`Poster for movie ${movie.original_title}`}
-      />
-      <div className='movie-details__overview'>{movie.overview}</div>
-    </div>
-  );
-
-  const renderRating = () => (
-    <div className='movie-details__rating'>
-      <Rating
-        stop={10}
-        fractions={2}
-        initialRating={myRating}
-        readonly={myRating !== 0}
-        onChange={rate}
-        emptySymbol='icon-star-empty'
-        fullSymbol='icon-star-full'
-      />
-    </div>
-  );
-
-  const renderAbout = params => {
-    const infos = [
-      { name: 'Rating', content: movie.vote_average },
-      { name: 'Popularity', content: movie.popularity },
-      { name: 'Language', content: movie.original_language },
-      {
-        name: 'Production Companies',
-        content: movie.production_companies.map(c => c.name).join(', '),
-      },
-    ];
-    const renderInfos = infos.map(info => (
-      <p className='movie-details__about-info' key={info.name}>
-        <span className='movie-details__info-name'>{info.name}:</span>{' '}
-        {info.content}
-      </p>
-    ));
-    return <div className='movie-details__about'>{renderInfos}</div>;
-  };
-
   if (!movie) {
     return null;
   }
 
+  const infos = [
+    { name: 'Rating', content: movie.vote_average },
+    { name: 'Popularity', content: movie.popularity },
+    { name: 'Language', content: movie.original_language },
+    {
+      name: 'Production Companies',
+      content: movie.production_companies.map(c => c.name).join(', '),
+    },
+  ];
+
+  const Wrapper = styled.div`
+    line-height: 22px;
+  `;
+
+  const Title = styled.h2`
+    margin-bottom: 20px;
+  `;
+
+  const About = styled.div`
+    ${fromLg(`
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    `)}
+  `;
+
+  const RatingWrapper = styled.div`
+    text-align: left;
+    font-size: 2em;
+    margin-bottom: 12px;
+    [class^='icon-star'] {
+      color: orange;
+    }
+  `;
   return (
-    <div className='movie-details'>
-      <h2 className='movie-details__header'>{movie.original_title}</h2>
-      {renderBackdrop()}
-      <div className='movie-details__bottom'>
-        {renderRating()}
-        {renderAbout()}
-      </div>
-    </div>
+    <Wrapper>
+      <Title>{movie.original_title}</Title>
+      <Backdrop
+        src={`${process.env.REACT_APP_IMAGES_BASE_URL}w500${movie.backdrop_path}`}
+        alt={`Poster for movie ${movie.original_title}`}
+        text={movie.overview}
+      />
+      <About>
+        <RatingWrapper>
+          <Rating
+            stop={10}
+            fractions={2}
+            initialRating={myRating}
+            readonly={myRating !== 0}
+            onChange={rate}
+            emptySymbol='icon-star-empty'
+            fullSymbol='icon-star-full'
+          />
+        </RatingWrapper>
+        <InfoList infos={infos} />
+      </About>
+    </Wrapper>
   );
 };
 
