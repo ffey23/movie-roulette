@@ -22,3 +22,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+[class^='icon-star'], [class*=' icon-star']{
+  color: orange;
+}

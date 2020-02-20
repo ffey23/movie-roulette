@@ -99,9 +99,6 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
     text-align: left;
     font-size: 2em;
     margin-bottom: 12px;
-    [class^='icon-star'] {
-      color: orange;
-    }
   `;
   return (
     <Wrapper>
