@@ -37,24 +37,36 @@ const MovieItem = ({ movie }) => {
       cursor: pointer;
     }
   `;
-  Wrapper = pure(Wrapper);
 
   const ImageWrapper = styled.div`
+    position: relative;
     padding: 10px;
-    // 1
+    padding-bottom: calc((100% - 20px) * 1.49997 + 10px);
+    ${fromMd(`
+      padding-bottom: 10px;
+      width: 70px;
+      height: 95px;
+      // prevents shrinking image if title is to big
+      flex-shrink: 0;
+    `)}
     ${fromLg(`
+      padding-bottom: calc((100% - 20px) * 1.49997 + 10px);
+      width: 100%;
+      height: auto;
       flex-grow: 1;
   `)}
   `;
   const Image = styled.img`
-    width: 100%;
+    position: absolute;
+    width: calc(100% - 20px);
     ${fromMd(`
-      width: 50px;
-    `)}
-    // 1
-    ${fromLg(`
-      height: 100%;
+      position: relative;
       width: 100%;
+    `)}
+    ${fromLg(`
+      position: absolute;
+      width: calc(100% - 20px);
+      // 1
       object-fit: cover;
     `)}
   `;
@@ -67,9 +79,13 @@ const MovieItem = ({ movie }) => {
     // Hides overflown text when it is flexbox item (md)
     overflow: hidden;
     padding: 10px;
+    padding-top: 0;
+    ${fromMd(`
+      padding-top: 10px;
+    `)}
     ${fromLg(`
       padding-top: 0;
-  `)}
+    `)}
   `;
   const InfoTitle = styled.h3`
     margin-bottom: 10px;
