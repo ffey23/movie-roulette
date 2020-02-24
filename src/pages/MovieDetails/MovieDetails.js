@@ -49,7 +49,11 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
       movie => {
         Swal.fire({
           icon: 'success',
-          title: 'Movie rated!',
+          toast: true,
+          position: 'top-end',
+          timer: 2000,
+          showConfirmButton: false,
+          text: 'Movie rated!',
         });
       },
       err => {
