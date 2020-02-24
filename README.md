@@ -22,7 +22,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 3.  Click on the load button at the bottom of the screen
 4.  Click on the roll button, choose some genre and click ok
 5.  Click the load button
-6.  Click on the roll button, choose "All genres" and click ok
+6.  Click on the roll button, choose "All genres" and click roll
 7.  Click the load button
 8.  Click on some movie on the list and scroll up-down
 9.  Go back to see if you have the same movie list and are at the same scroll position as before you went to the movie-details page
