@@ -136,7 +136,7 @@ const displaySuccess = message => {
     icon: 'success',
     toast: true,
     position: 'top-end',
-    timer: 3000,
+    timer: 2000,
     showConfirmButton: false,
     text: message,
   });
