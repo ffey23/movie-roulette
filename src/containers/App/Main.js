@@ -6,10 +6,11 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import styled from 'styled-components';
 import { contentContainer } from './styled/mixins';
 import { fromLg } from '@/styled/mixins';
+import { colors } from '@/styled/variables';
 
 function Main() {
   const Wrapper = styled.main`
-    background-color: $c-neutral-light;
+    background-color: ${colors.neutralLight};
     min-height: calc(100vh - 44px);
     ${fromLg(`
       min-height: calc(100vh - 80px);
