@@ -5,6 +5,7 @@ import RatingDisplay from './RatingDisplay';
 import styled from 'styled-components';
 import { colors } from '@/styled/variables';
 import { fromMd, fromLg } from '@/styled/mixins';
+import { pure } from 'recompose';
 
 const MovieItem = ({ movie }) => {
   const [navigation, setNavigation] = useState(null);
@@ -15,7 +16,7 @@ const MovieItem = ({ movie }) => {
   if (navigation)
     return <Redirect to={`movie-details/${movie.id}`} push={true} />;
 
-  const Wrapper = styled.div`
+  let Wrapper = styled.div`
     // Needed for rating positioning
     position: relative;
 
@@ -36,6 +37,8 @@ const MovieItem = ({ movie }) => {
       cursor: pointer;
     }
   `;
+  Wrapper = pure(Wrapper);
+
   const ImageWrapper = styled.div`
     padding: 10px;
     // 1
@@ -75,8 +78,6 @@ const MovieItem = ({ movie }) => {
     overflow: hidden;
   `;
 
-  const InfoText = styled.p``;
-
   return (
     <Wrapper onClick={navigateToMovie}>
       <ImageWrapper>
@@ -92,7 +93,7 @@ const MovieItem = ({ movie }) => {
         <InfoTitle title={movie.original_title}>
           {movie.original_title} ({movie.release_date.slice(0, 4)})
         </InfoTitle>
-        <InfoText>Language: {movie.original_language}</InfoText>
+        <p>Language: {movie.original_language}</p>
       </Info>
     </Wrapper>
   );
@@ -102,4 +103,4 @@ MovieItem.propTypes = {
   movie: PropTypes.object,
 };
 
-export default MovieItem;
+export default pure(MovieItem);

@@ -23,8 +23,6 @@ const Header = () => {
     align-items: center;
   `;
 
-  const Title = styled.h1``;
-
   const SmallTitle = styled.span`
     ${fromLg(`
         display: none;
@@ -50,11 +48,11 @@ const Header = () => {
   return (
     <Wrapper>
       <Content>
-        <Title>
+        <h1>
           {/* We need different title for small and big screens */}
           <BigTitle>Movie Roulette</BigTitle>
           <SmallTitle>MR</SmallTitle>
-        </Title>
+        </h1>
         <AuthButton styles={authButtonStyles} />
       </Content>
     </Wrapper>

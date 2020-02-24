@@ -9,11 +9,11 @@ const InfoItem = ({ name, content }) => {
   const Name = styled.span`
     font-weight: bold;
   `;
-  const Content = styled.span``;
+
   return (
     <Wrapper>
       <Name>{name}: </Name>
-      <Content>{content}</Content>
+      <span>{content}</span>
     </Wrapper>
   );
 };

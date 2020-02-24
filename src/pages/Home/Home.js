@@ -5,7 +5,6 @@ import { Redirect } from 'react-router-dom';
 import RouletteMovieList from '@/containers/RouletteMovieList/RouletteMovieList';
 import Landing from '@/components/Landing/Landing';
 import { login } from '@/redux/auth/actions';
-import styled from 'styled-components';
 
 const Home = ({ location, loggedIn, login }) => {
   const [nav, setNav] = useState(null);
@@ -27,13 +26,11 @@ const Home = ({ location, loggedIn, login }) => {
     return <Landing />;
   };
 
-  const Wrapper = styled.div``;
-
   return (
-    <Wrapper>
+    <div>
       {renderRedirect()}
       {renderPage()}
-    </Wrapper>
+    </div>
   );
 };
 

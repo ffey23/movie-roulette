@@ -6,8 +6,6 @@ class Loader extends React.Component {
   render() {
     const { message } = this.props;
 
-    const Wrapper = styled.div``;
-
     const spin = keyframes`
     0% {
       transform: rotate(0deg);
@@ -33,10 +31,10 @@ class Loader extends React.Component {
     `;
 
     return (
-      <Wrapper>
+      <div>
         <Spinner />
         <Message>{message}</Message>
-      </Wrapper>
+      </div>
     );
   }
 

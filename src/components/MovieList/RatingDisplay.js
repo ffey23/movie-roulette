@@ -6,8 +6,6 @@ const RatingDisplay = ({ rating }) => {
     position: relative;
   `;
 
-  const StarWrapper = styled.div``;
-
   const Star = styled.span`
     font-size: 2.7em;
   `;
@@ -21,9 +19,9 @@ const RatingDisplay = ({ rating }) => {
 
   return (
     <Wrapper>
-      <StarWrapper>
+      <div>
         <Star className='icon-star-full'></Star>
-      </StarWrapper>
+      </div>
       <RatingNumber>{rating.toFixed(1)}</RatingNumber>
     </Wrapper>
   );

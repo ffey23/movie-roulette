@@ -4,8 +4,6 @@ import { contentContainer } from './styled/mixins';
 import styled from 'styled-components';
 
 function Footer() {
-  const Wrapper = styled.footer``;
-
   const Content = styled.div`
     ${contentContainer()}
     height: 100%;
@@ -18,25 +16,23 @@ function Footer() {
     margin-bottom: 12px;
   `;
 
-  const Anchor = styled.a``;
-
   const LogoWrapper = styled.div`
     width: 100px;
   `;
 
   return (
-    <Wrapper>
+    <div>
       <Content>
         <LinkList>
-          <Anchor href='https://icons8.com/icon/W71PIW3yxyeJ/roulette'>
+          <a href='https://icons8.com/icon/W71PIW3yxyeJ/roulette'>
             Roulette icon by Icons8
-          </Anchor>
+          </a>
         </LinkList>
         <LogoWrapper>
           <MdbLogo />
         </LogoWrapper>
       </Content>
-    </Wrapper>
+    </div>
   );
 }
 

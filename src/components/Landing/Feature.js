@@ -11,8 +11,6 @@ function Feature({ text, SvgImage }) {
     color: ${colors.textLight};
   `;
 
-  const Text = styled.strong``;
-
   const ImageWrapper = styled.div`
     text-align: center;
     padding: 20px;
@@ -22,12 +20,13 @@ function Feature({ text, SvgImage }) {
       fill: ${colors.primary};
     }
   `;
+
   return (
     <Wrapper>
       <ImageWrapper>
         <SvgImage />
       </ImageWrapper>
-      <Text>{text}</Text>
+      <strong>{text}</strong>
     </Wrapper>
   );
 }

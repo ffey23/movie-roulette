@@ -8,8 +8,8 @@ import { fetchGenres } from '@/redux/fixtures/actions';
 import { dismissError } from '@/redux/error/actions';
 import Swal from 'sweetalert2';
 import './RouletteMovieList.scss';
-import styled from 'styled-components';
 import BottomButtons from './BottomButtons';
+import styles from './RouletteMovieList.module.scss';
 
 class RouletteMovieList extends Component {
   renderError() {
@@ -59,18 +59,14 @@ class RouletteMovieList extends Component {
     const { moviesShown } = this.props;
     this.renderError();
 
-    const Wrapper = styled.div``;
-    const MovieListWrapper = styled.div`
-      margin-bottom: 25px;
-    `;
     return (
-      <Wrapper>
-        <MovieListWrapper>
+      <div>
+        <div className={styles.movieListWrapper}>
           <MovieList movies={moviesShown} />
-        </MovieListWrapper>
+        </div>
         {this.renderLoader()}
         {this.renderBottomButtons()}
-      </Wrapper>
+      </div>
     );
   }
 

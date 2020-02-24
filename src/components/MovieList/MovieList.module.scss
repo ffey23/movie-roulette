@@ -1,0 +1,11 @@
+@import '../../assets/mixins';
+
+.movieListWrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-gap: 20px;
+    @include fromLg {
+        grid-gap: 40px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
