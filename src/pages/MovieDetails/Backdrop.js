@@ -7,7 +7,6 @@ import { colors } from '@/styled/variables';
 function Backdrop({ src, alt, text }) {
   const Wrapper = styled.div`
     position: relative;
-    margin-bottom: 12px;
   `;
 
   const ImageWrapper = styled.div`
@@ -26,7 +25,6 @@ function Backdrop({ src, alt, text }) {
     border-right: 2px solid ${colors.neutralDark};
     border-radius: 0 0 3px 3px;
     padding: 6px 2px;
-    margin-bottom: 12px;
     ${fromMd(`
       position: absolute;
       left: 0;
@@ -34,7 +32,6 @@ function Backdrop({ src, alt, text }) {
       width: 400px;
       padding: 10px;
       border: none;
-      margin-bottom: 0;
     `)}
   `;
 

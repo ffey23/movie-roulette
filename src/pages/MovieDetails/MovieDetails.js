@@ -9,6 +9,8 @@ import styled from 'styled-components';
 import { fromLg } from '@/styled/mixins';
 import Backdrop from './Backdrop';
 import InfoList from '@/pages/MovieDetails/InfoList';
+import { ReactComponent as StarFull } from '@/assets/images/star-full.svg';
+import { ReactComponent as StarEmpty } from '@/assets/images/star-empty.svg';
 
 const MovieDetails = ({ startLoader, finishLoader }) => {
   const { id } = useParams();
@@ -92,6 +94,11 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
   `;
 
   const About = styled.div`
+    margin-top: 8px;
+
+    @media screen and (min-width: 380px) {
+      margin-top: 12px;
+    }
     ${fromLg(`
         display: flex;
         flex-direction: row-reverse;
@@ -100,9 +107,43 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
   `;
 
   const RatingWrapper = styled.div`
-    text-align: left;
-    font-size: 2em;
     margin-bottom: 12px;
+    // hacking react rating responsiveness - this will be only for smaller screens to 380px
+    @media screen and (max-width: 380px) {
+      margin-bottom: 0px;
+      > span {
+        display: flex !important;
+        > span {
+          flex-grow: 1;
+          /* > span {
+            height: 0;
+            padding-bottom: 100%;
+          } */
+          > span[style*='width: 50%'] {
+            > svg {
+              width: 200%;
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const starsStyles = `
+    fill: orange;
+    // position: absolute;
+    @media screen and (min-width: 380px) {
+      position: relative;
+      width: 32px;
+    }
+  `;
+
+  const StarFullS = styled(StarFull)`
+    ${starsStyles}
+  `;
+
+  const StarEmptyS = styled(StarEmpty)`
+    ${starsStyles}
   `;
   return (
     <Wrapper>
@@ -120,8 +161,8 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
             initialRating={myRating}
             readonly={myRating !== 0}
             onChange={rate}
-            emptySymbol='icon-star-empty'
-            fullSymbol='icon-star-full'
+            emptySymbol={<StarEmptyS />}
+            fullSymbol={<StarFullS />}
           />
         </RatingWrapper>
         <InfoList infos={infos} />
