@@ -16,6 +16,10 @@ function Footer() {
     margin-bottom: 12px;
   `;
 
+  const Link = styled.div`
+    padding: 5px 0;
+  `;
+
   const LogoWrapper = styled.div`
     width: 100px;
   `;
@@ -24,9 +28,21 @@ function Footer() {
     <div>
       <Content>
         <LinkList>
-          <a href='https://icons8.com/icon/W71PIW3yxyeJ/roulette'>
-            Roulette icon by Icons8
-          </a>
+          <Link>
+            <a href='https://icons8.com/icon/W71PIW3yxyeJ/roulette'>
+              Roulette icon by Icons8
+            </a>
+          </Link>
+          <Link>
+            Icons made by{' '}
+            <a href='https://www.flaticon.com/authors/freepik' title='Freepik'>
+              Freepik
+            </a>{' '}
+            from{' '}
+            <a href='https://www.flaticon.com/' title='Flaticon'>
+              www.flaticon.com
+            </a>
+          </Link>
         </LinkList>
         <LogoWrapper>
           <MdbLogo />

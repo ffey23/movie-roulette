@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import { colors } from '@/styled/variables';
 import { fromMd, fromLg } from '@/styled/mixins';
 import { pure } from 'recompose';
+import Image from '@/components/Image/Image';
+import { ReactComponent as ErrorSvg } from '@/assets/images/error-icon.svg';
 
 const MovieItem = ({ movie }) => {
   const [navigation, setNavigation] = useState(null);
@@ -54,9 +56,10 @@ const MovieItem = ({ movie }) => {
       width: 100%;
       height: auto;
       flex-grow: 1;
-  `)}
+    `)}
   `;
-  const Image = styled.img`
+
+  const imageCss = `
     position: absolute;
     width: calc(100% - 20px);
     ${fromMd(`
@@ -70,6 +73,37 @@ const MovieItem = ({ movie }) => {
       object-fit: cover;
     `)}
   `;
+
+  const ErrorFallback = () => {
+    const ErrorSvgWrapper = styled.div`
+      position: absolute;
+      width: 100px;
+      top: calc(50% - 50px);
+      left: calc(50% - 50px);
+      ${fromMd(`
+        width: 55px;
+        position: relative;
+        top: 10px;
+        left: 0;
+      `)}
+      ${fromLg(`
+        position: absolute;
+        width: 100px;
+        top: calc(50% - 50px);
+        left: calc(50% - 50px);
+      `)}
+      svg {
+        fill: ${colors.neutralDark};
+      }
+    `;
+
+    return (
+      <ErrorSvgWrapper>
+        <ErrorSvg />
+      </ErrorSvgWrapper>
+    );
+  };
+
   const RatingDisplayWrapper = styled.div`
     position: absolute;
     right: -23px;
@@ -100,6 +134,8 @@ const MovieItem = ({ movie }) => {
         <Image
           src={`${process.env.REACT_APP_IMAGES_BASE_URL}w300/${movie.poster_path}`}
           alt={`Poster for movie ${movie.original_title}`}
+          ErrorFallback={ErrorFallback}
+          css={imageCss}
         />
       </ImageWrapper>
       <RatingDisplayWrapper>
