@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 
 class Loader extends React.Component {
   render() {
-    const { message } = this.props;
+    const { message, spinnerClass, messageClass } = this.props;
 
     const spin = keyframes`
     0% {
@@ -32,8 +32,8 @@ class Loader extends React.Component {
 
     return (
       <div>
-        <Spinner />
-        <Message>{message}</Message>
+        <Spinner className={spinnerClass} />
+        <Message className={messageClass}>{message}</Message>
       </div>
     );
   }
@@ -53,5 +53,7 @@ class Loader extends React.Component {
 Loader.propTypes = {
   message: PropTypes.string,
   blockScroll: PropTypes.bool,
+  spinnerClass: PropTypes.string,
+  messageClass: PropTypes.string,
 };
 export default Loader;
