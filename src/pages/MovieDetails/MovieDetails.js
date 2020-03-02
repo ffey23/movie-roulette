@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import Rating from 'react-rating';
 import styled from 'styled-components';
 import { fromLg } from '@/styled/mixins';
-import Backdrop from './Backdrop';
+import Backdrop from './Backdrop/Backdrop';
 import InfoList from '@/pages/MovieDetails/InfoList';
 import { ReactComponent as StarFull } from '@/assets/images/star-full.svg';
 import { ReactComponent as StarEmpty } from '@/assets/images/star-empty.svg';

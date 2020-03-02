@@ -3,27 +3,25 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { fromMd } from '@/styled/mixins';
 import { colors } from '@/styled/variables';
+import Img from 'react-image';
+import styles from './Backdrop.module.scss';
+import LoaderImage from './LoaderImage/LoaderImage';
+import ErrorImageFallback from './ErrorImageFallback/ErrorImageFallback';
 
 function Backdrop({ src, alt, text }) {
   const Wrapper = styled.div`
     position: relative;
+    border: 2px solid ${colors.neutralDark};
+    border-radius: 3px;
   `;
 
   const ImageWrapper = styled.div`
     padding-bottom: 56.19916%;
     position: relative;
   `;
-  const Image = styled.img`
-    width: 100%;
-    position: absolute;
-  `;
 
   const Overview = styled.div`
     background-color: white;
-    border-bottom: 2px solid ${colors.neutralDark};
-    border-left: 2px solid ${colors.neutralDark};
-    border-right: 2px solid ${colors.neutralDark};
-    border-radius: 0 0 3px 3px;
     padding: 6px 2px;
     ${fromMd(`
       position: absolute;
@@ -38,7 +36,13 @@ function Backdrop({ src, alt, text }) {
   return (
     <Wrapper>
       <ImageWrapper>
-        <Image src={src} alt={alt} />
+        <Img
+          src={src}
+          alt={alt}
+          unloader={<ErrorImageFallback />}
+          loader={<LoaderImage />}
+          className={styles.image}
+        />
       </ImageWrapper>
       <Overview className='movie-details__overview'>{text}</Overview>
     </Wrapper>
