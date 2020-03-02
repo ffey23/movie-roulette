@@ -8,6 +8,10 @@ const Button = ({ onClick, text, css, ...rest }) => {
   const colorConfirmDark = '#527ac2';
   const colorConfirmText = '#fff';
   const Button = styled.button`
+    :hover {
+      cursor: pointer;
+    }
+
     ${props =>
       props.confirm &&
       `
