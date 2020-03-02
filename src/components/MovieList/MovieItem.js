@@ -6,8 +6,10 @@ import styled from 'styled-components';
 import { colors } from '@/styled/variables';
 import { fromMd, fromLg } from '@/styled/mixins';
 import { pure } from 'recompose';
-import Image from '@/components/Image/Image';
+import Img from 'react-image';
+import styles from './MovieItem.module.scss';
 import { ReactComponent as ErrorSvg } from '@/assets/images/error-icon.svg';
+import Loader from '@/components/Loader/Loader';
 
 const MovieItem = ({ movie }) => {
   const [navigation, setNavigation] = useState(null);
@@ -59,22 +61,7 @@ const MovieItem = ({ movie }) => {
     `)}
   `;
 
-  const imageCss = `
-    position: absolute;
-    width: calc(100% - 20px);
-    ${fromMd(`
-      position: relative;
-      width: 100%;
-    `)}
-    ${fromLg(`
-      position: absolute;
-      width: calc(100% - 20px);
-      // 1
-      object-fit: cover;
-    `)}
-  `;
-
-  const ErrorFallback = () => {
+  const ErrorImageFallback = () => {
     const ErrorSvgWrapper = styled.div`
       position: absolute;
       width: 100px;
@@ -104,11 +91,37 @@ const MovieItem = ({ movie }) => {
     );
   };
 
+  const LoaderImage = params => {
+    const Wrapper = styled.div`
+      position: absolute;
+      top: calc(50% - 40px);
+      left: calc(50% - 40px);
+      ${fromMd(`
+        width: 50px;
+        position: relative;
+        top: 14px;
+        left: 0;
+      `)}
+      ${fromLg(`
+        position: absolute;
+        top: calc(50% - 40px);
+        left: calc(50% - 40px);
+      `)}
+    `;
+
+    return (
+      <Wrapper>
+        <Loader spinnerClass={styles.spinner} />
+      </Wrapper>
+    );
+  };
+
   const RatingDisplayWrapper = styled.div`
     position: absolute;
     right: -23px;
     top: -20px;
   `;
+
   const Info = styled.div`
     // Hides overflown text when it is flexbox item (md)
     overflow: hidden;
@@ -121,6 +134,7 @@ const MovieItem = ({ movie }) => {
       padding-top: 0;
     `)}
   `;
+
   const InfoTitle = styled.h3`
     margin-bottom: 10px;
     text-overflow: ellipsis;
@@ -131,11 +145,12 @@ const MovieItem = ({ movie }) => {
   return (
     <Wrapper onClick={navigateToMovie}>
       <ImageWrapper>
-        <Image
+        <Img
           src={`${process.env.REACT_APP_IMAGES_BASE_URL}w300/${movie.poster_path}`}
           alt={`Poster for movie ${movie.original_title}`}
-          ErrorFallback={ErrorFallback}
-          css={imageCss}
+          unloader={<ErrorImageFallback />}
+          loader={<LoaderImage />}
+          className={styles.image}
         />
       </ImageWrapper>
       <RatingDisplayWrapper>

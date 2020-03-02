@@ -1,0 +1,27 @@
+@import '../../assets/mixins';
+
+.image {
+    position: absolute;
+    width: calc(100% - 20px);
+    @include fromMd{
+        position: relative;
+        width: 100%;
+    }
+    @include fromLg{
+        position: absolute;
+        width: calc(100% - 20px);
+        // 1
+        object-fit: cover;
+    }
+}
+
+.spinner {
+    @include fromMd {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    @include fromLg{
+        width: 80px !important;
+        height: 80px !important;
+    }
+}
