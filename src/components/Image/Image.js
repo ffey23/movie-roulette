@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Image = ({ src, alt, css, ErrorFallback }) => {
+const Image = ({ src, alt, css, ErrorFallback, ...rest }) => {
   const [error, setError] = useState(false);
 
   if (error) {
@@ -15,7 +15,9 @@ const Image = ({ src, alt, css, ErrorFallback }) => {
     ${css}
   `;
 
-  return <Image onError={setError.bind(null, true)} src={src} alt={alt} />;
+  return (
+    <Image onError={setError.bind(null, true)} src={src} alt={alt} {...rest} />
+  );
 };
 
 Image.propTypes = {
