@@ -44,7 +44,8 @@ const createRequestToken = () => {
         // Saving request token into local storage and redirect to moviedb auth page
         const { request_token } = response;
         window.localStorage.setItem('request_token', request_token);
-        const validateRequestTokenUrl = `${process.env.REACT_APP_AUTHORIZATION_PAGE}request_token=${request_token}`;
+        const AUTH_PAGE_BASE_URL = 'https://www.themoviedb.org/auth/access?';
+        const validateRequestTokenUrl = `${AUTH_PAGE_BASE_URL}request_token=${request_token}`;
         window.location = validateRequestTokenUrl;
       }
     });

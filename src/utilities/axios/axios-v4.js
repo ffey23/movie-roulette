@@ -2,8 +2,10 @@
 import axios from 'axios';
 import { onResponseSuccess } from './interceptor-callbacks';
 
+const API_BASE_URL = 'https://api.themoviedb.org/4/';
+
 const client = axios.create({
-  baseURL: process.env.REACT_APP_API_V4_BASE_URL,
+  baseURL: API_BASE_URL,
 });
 
 client.interceptors.request.use(config => {

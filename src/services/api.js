@@ -9,8 +9,9 @@ export default {
   },
   auth: {
     fetch_request_token() {
+      const REDIRECT_BACK_URL = 'http://localhost:3000/?get_access_token=true';
       return axiosV4.post('auth/request_token', {
-        redirect_to: process.env.REACT_APP_LOGIN_REDIRECT,
+        redirect_to: REDIRECT_BACK_URL,
       });
     },
     fetch_access_token(request_token) {

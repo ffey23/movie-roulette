@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { fromLg } from '@/styled/mixins';
 import Backdrop from './Backdrop/Backdrop';
 import InfoList from '@/pages/MovieDetails/InfoList';
+import { IMAGES_BASE_URL } from '@/services/constants';
 
 const MovieDetails = ({ startLoader, finishLoader }) => {
   const { id } = useParams();
@@ -108,7 +109,7 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
     <Wrapper>
       <Title>{movie.original_title}</Title>
       <Backdrop
-        src={`${process.env.REACT_APP_IMAGES_BASE_URL}w500${movie.backdrop_path}`}
+        src={`${IMAGES_BASE_URL}w500${movie.backdrop_path}`}
         alt={`Poster for movie ${movie.original_title}`}
         text={movie.overview}
       />

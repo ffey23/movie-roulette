@@ -5,6 +5,7 @@ import Img from 'react-image';
 import Loader from './Loader';
 import Error from './Error';
 import styles from './Image.module.scss';
+import { IMAGES_BASE_URL } from '@/services/constants';
 
 const Image = ({ movie }) => {
   const ImageWrapper = styled.div`
@@ -29,7 +30,7 @@ const Image = ({ movie }) => {
   return (
     <ImageWrapper>
       <Img
-        src={`${process.env.REACT_APP_IMAGES_BASE_URL}w300/${movie.poster_path}`}
+        src={`${IMAGES_BASE_URL}w300/${movie.poster_path}`}
         alt={`Poster for movie ${movie.original_title}`}
         unloader={<Error />}
         loader={<Loader />}
