@@ -1,14 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { ReactComponent as Starr } from '@/assets/images/star-full.svg';
 
 const RatingStarDisplay = ({ rating }) => {
   const Wrapper = styled.div`
     position: relative;
   `;
 
-  const Star = styled.span`
-    font-size: 2.7em;
+  const StarWrapper = styled.div`
+    width: 43px;
+    height: 43px;
+    & > svg {
+      fill: orange;
+    }
   `;
 
   const RatingNumber = styled.div`
@@ -20,9 +25,9 @@ const RatingStarDisplay = ({ rating }) => {
 
   return (
     <Wrapper>
-      <div>
-        <Star className='icon-star-full'></Star>
-      </div>
+      <StarWrapper>
+        <Starr />
+      </StarWrapper>
       <RatingNumber>{rating.toFixed(1)}</RatingNumber>
     </Wrapper>
   );
