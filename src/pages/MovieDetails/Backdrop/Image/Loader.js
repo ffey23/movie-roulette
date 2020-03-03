@@ -1,8 +1,8 @@
 import React from 'react';
-import Loader from '@/components/Loader/Loader';
+import LoaderComponent from '@/components/Loader/Loader';
 import styled from 'styled-components';
 
-const LoaderImage = props => {
+const Loader = props => {
   const Wrapper = styled.div`
     position: absolute;
     top: calc(50% - 40px);
@@ -11,9 +11,9 @@ const LoaderImage = props => {
 
   return (
     <Wrapper>
-      <Loader />
+      <LoaderComponent />
     </Wrapper>
   );
 };
 
-export default LoaderImage;
+export default Loader;

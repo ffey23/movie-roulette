@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { ReactComponent as ErrorSvg } from '@/assets/images/error-icon.svg';
 import { colors } from '@/styled/variables';
 
-const ErrorImageFallback = () => {
-  const ErrorSvgWrapper = styled.div`
+const Error = () => {
+  const Wrapper = styled.div`
     position: absolute;
     width: 100px;
     top: calc(50% - 50px);
@@ -15,10 +15,10 @@ const ErrorImageFallback = () => {
   `;
 
   return (
-    <ErrorSvgWrapper>
+    <Wrapper>
       <ErrorSvg />
-    </ErrorSvgWrapper>
+    </Wrapper>
   );
 };
 
-export default ErrorImageFallback;
+export default Error;

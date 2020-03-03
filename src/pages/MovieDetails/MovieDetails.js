@@ -4,13 +4,11 @@ import { useParams } from 'react-router-dom';
 import { startLoader, finishLoader } from '@/redux/loader/actions';
 import api from '@/services/api';
 import Swal from 'sweetalert2';
-import Rating from 'react-rating';
+import Rating from './Rating.js';
 import styled from 'styled-components';
 import { fromLg } from '@/styled/mixins';
 import Backdrop from './Backdrop/Backdrop';
 import InfoList from '@/pages/MovieDetails/InfoList';
-import { ReactComponent as StarFull } from '@/assets/images/star-full.svg';
-import { ReactComponent as StarEmpty } from '@/assets/images/star-empty.svg';
 
 const MovieDetails = ({ startLoader, finishLoader }) => {
   const { id } = useParams();
@@ -106,45 +104,6 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
     `)}
   `;
 
-  const RatingWrapper = styled.div`
-    margin-bottom: 12px;
-    // hacking react rating responsiveness - this will be only for smaller screens to 380px
-    @media screen and (max-width: 380px) {
-      margin-bottom: 0px;
-      > span {
-        display: flex !important;
-        > span {
-          flex-grow: 1;
-          /* > span {
-            height: 0;
-            padding-bottom: 100%;
-          } */
-          > span[style*='width: 50%'] {
-            > svg {
-              width: 200%;
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  const starsStyles = `
-    fill: orange;
-    // position: absolute;
-    @media screen and (min-width: 380px) {
-      position: relative;
-      width: 32px;
-    }
-  `;
-
-  const StarFullS = styled(StarFull)`
-    ${starsStyles}
-  `;
-
-  const StarEmptyS = styled(StarEmpty)`
-    ${starsStyles}
-  `;
   return (
     <Wrapper>
       <Title>{movie.original_title}</Title>
@@ -154,17 +113,7 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
         text={movie.overview}
       />
       <About>
-        <RatingWrapper>
-          <Rating
-            stop={10}
-            fractions={2}
-            initialRating={myRating}
-            readonly={myRating !== 0}
-            onChange={rate}
-            emptySymbol={<StarEmptyS />}
-            fullSymbol={<StarFullS />}
-          />
-        </RatingWrapper>
+        <Rating rating={myRating} onChange={rate} />
         <InfoList infos={infos} />
       </About>
     </Wrapper>
