@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-const RatingDisplay = ({ rating }) => {
+const RatingStarDisplay = ({ rating }) => {
   const Wrapper = styled.div`
     position: relative;
   `;
@@ -27,4 +28,8 @@ const RatingDisplay = ({ rating }) => {
   );
 };
 
-export default RatingDisplay;
+RatingStarDisplay.propTypes = {
+  rating: PropTypes.number.isRequired,
+};
+
+export default RatingStarDisplay;
