@@ -24,7 +24,10 @@ const Loader = () => {
 
   return (
     <Wrapper>
-      <LoaderComponent spinnerClass={styles.spinner} />
+      <LoaderComponent
+        spinnerClass={styles.spinner}
+        spinnerPartClass={styles.spinnerPart}
+      />
     </Wrapper>
   );
 };
