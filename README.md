@@ -2,12 +2,20 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Movie Roulette App
 
-## Runing App
+## Runing The App
 
 1. Clone repository
-2. npm i
-3. npm start
-4. You must have the account on https://www.themoviedb.org/ in order to login
+2. Install **Node.js** if you don't have it already
+3. Navigate to the root project folder and run **npm i** and wait for installation process to finish
+4. Create an account on https://www.themoviedb.org
+5. Create API key for https://www.themoviedb.org by following [these instuctions](https://developers.themoviedb.org/3/getting-started/introduction)
+6. In the root project folder create **.env.local** file and provide it with the next content:
+``` 
+    REACT_APP_API_KEY=YOUR_V3_API_KEY
+    REACT_APP_ACCESS_TOKEN=YOUR_V4_API_READ_ACCESS_TOKEN
+```
+7. run **npm start** and the app will automatically open in Chrome after compilation
+
 
 ## Features
 
