@@ -33,7 +33,7 @@ function Feature({ text, SvgImage }) {
 
 Feature.propTypes = {
   text: PropTypes.string.isRequired,
-  SvgImage: PropTypes.func.isRequired,
+  SvgImage: PropTypes.object.isRequired,
 };
 
 export default Feature;
