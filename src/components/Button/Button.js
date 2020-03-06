@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Button = ({ onClick, text, css, ...rest }) => {
+const Button = ({ onClick, text, ...rest }) => {
   const colorConfirm = '#6495ed';
   const colorConfirmLight = '#729eee';
   const colorConfirmDark = '#527ac2';
@@ -36,7 +36,6 @@ const Button = ({ onClick, text, css, ...rest }) => {
 Button.propTypes = {
   text: PropTypes.string,
   onClick: PropTypes.func,
-  css: PropTypes.string,
 };
 
 export default Button;
