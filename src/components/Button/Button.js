@@ -15,6 +15,7 @@ const Button = ({ onClick, text, ...rest }) => {
     ${props =>
       props.confirm &&
       `
+      border: none;
       background-color: ${colorConfirm};
       background: linear-gradient(135deg, ${colorConfirm}, ${colorConfirmDark});
       color: ${colorConfirmText};

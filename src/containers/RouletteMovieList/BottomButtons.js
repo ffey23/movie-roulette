@@ -48,6 +48,7 @@ function BottomButtons({
     font-weight: bold;
     font-size: 2em;
     margin-bottom: 15px;
+    box-shadow: 3px 7px 9px #777, inset 0px 2px 3px #fff;
     ${fromLg(`
       width: 90px;
       height: 90px;
