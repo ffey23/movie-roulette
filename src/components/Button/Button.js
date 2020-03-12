@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Button = ({ onClick, text, ...rest }) => {
+const Button = ({ onClick, children, ...rest }) => {
   const colorConfirm = '#6495ed';
   const colorConfirmLight = '#729eee';
   const colorConfirmDark = '#527ac2';
@@ -23,20 +23,19 @@ const Button = ({ onClick, text, ...rest }) => {
         background-color: ${colorConfirmLight};
         background: linear-gradient(135deg, ${colorConfirmLight}, ${colorConfirm});
       } 
-      box-shadow: 3px 7px 9px #777, inset 0px 2px 3px #fff;
     `}
   `;
 
   return (
     <Button onClick={onClick} {...rest}>
-      {text}
+      {children}
     </Button>
   );
 };
 
 Button.propTypes = {
-  text: PropTypes.string,
   onClick: PropTypes.func,
+  children: PropTypes.string,
 };
 
 export default Button;

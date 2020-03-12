@@ -41,9 +41,10 @@ class AuthButton extends Component {
     `;
     return (
       <Button
-        text={text}
         onClick={loggedIn ? this.logOut.bind(this) : this.logIn.bind(this)}
-      />
+      >
+        {text}
+      </Button>
     );
   }
 

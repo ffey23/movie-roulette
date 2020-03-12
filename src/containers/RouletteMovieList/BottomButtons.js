@@ -64,7 +64,9 @@ function BottomButtons({
     if (!showLoadButton) return null;
     return (
       <LoadButtonWrapper>
-        <Button confirm onClick={handleLoadButton} text='Load' />
+        <Button confirm onClick={handleLoadButton}>
+          Load
+        </Button>
       </LoadButtonWrapper>
     );
   };
@@ -73,7 +75,9 @@ function BottomButtons({
     if (!showRollButton) return null;
     return (
       <RollButtonWrapper>
-        <Button confirm onClick={handleRollButton} text='Roll' />
+        <Button confirm onClick={handleRollButton}>
+          Roll
+        </Button>
       </RollButtonWrapper>
     );
   };
