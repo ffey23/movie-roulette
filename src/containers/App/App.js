@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import ErrorPopup from '@/containers/ErrorPopup/ErrorPopup';
 
 let App = ({ checkLoggedIn }) => {
   checkLoggedIn();
@@ -20,6 +21,7 @@ let App = ({ checkLoggedIn }) => {
         anywhere in the ap via redux loader (start/finish)Loader actions 
       */}
       <MainLoader />
+      <ErrorPopup />
     </div>
   );
 };
