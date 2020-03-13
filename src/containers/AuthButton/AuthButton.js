@@ -5,7 +5,6 @@ import { Redirect } from 'react-router-dom';
 import ButtonRaw from '@/components/Button/Button';
 import { createRequestToken, logout } from '@/redux/auth/actions';
 import { dismissError } from '@/redux/error/actions';
-import Swal from 'sweetalert2';
 import styled from 'styled-components';
 
 class AuthButton extends Component {
@@ -14,17 +13,6 @@ class AuthButton extends Component {
     this.state = {
       navigate: null,
     };
-  }
-
-  renderError() {
-    const { error, dismissError } = this.props;
-    if (error) {
-      Swal.fire({
-        icon: 'error',
-        title: error.title,
-        text: error.message,
-      }).then(() => dismissError());
-    }
   }
 
   renderNavigation() {
@@ -49,7 +37,6 @@ class AuthButton extends Component {
   }
 
   render() {
-    this.renderError();
     return this.renderNavigation() || this.renderButton();
   }
 
