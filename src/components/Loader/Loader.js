@@ -78,7 +78,9 @@ class Loader extends React.Component {
   }
 
   componentWillUnmount() {
-    document.body.style.overflow = 'auto';
+    if (this.props.blockScroll) {
+      document.body.style.overflow = 'auto';
+    }
   }
 }
 
