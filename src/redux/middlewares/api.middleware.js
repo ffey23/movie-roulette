@@ -11,9 +11,13 @@ export default store => next => action => {
     return next(action);
   }
 
-  const { api, types, loaderMessage, stopLoaderOnSuccess = true } = action[
-    API_MIDDLEWARE
-  ];
+  const {
+    api,
+    types,
+    loaderMessage,
+    failureFeedback,
+    stopLoaderOnSuccess = true,
+  } = action[API_MIDDLEWARE];
 
   if (!Array.isArray(types)) {
     throw new Error('types must be an array');
@@ -40,6 +44,17 @@ export default store => next => action => {
   // eslint-disable-next-line
   if (loaderMessage != undefined && typeof loaderMessage != 'string') {
     throw new Error('loaderMessage must be a string');
+  }
+
+  // failureFeedback is the {title: string, message: string} object tipe
+  // it is used for overriding default error message
+  if (failureFeedback != undefined) {
+    const { title, message } = failureFeedback;
+    if (typeof message != 'string' || typeof title != 'string') {
+      throw new Error(
+        "failureFeedback must be an object with string properties 'message' and 'title'"
+      );
+    }
   }
 
   const actionWith = (data, dataSpecific) => {
@@ -70,20 +85,27 @@ export default store => next => action => {
     },
     error => {
       store.dispatch(finishLoader());
-      const defaultTitle = 'Error';
+
+      const generateError = () => {
+        let errorOutput = failureFeedback;
+        if (!errorOutput) {
+          const defaultTitle = 'Error';
+          errorOutput = {
+            message: error.response
+              ? error.response.data.status_message ||
+                error.response.data.errors[0]
+              : error.message,
+            title: error.response ? error.response.status + '!' : defaultTitle,
+          };
+        }
+        return errorOutput;
+      };
+
       return next(
         actionWith(
           {
             type: failureType,
-            error: {
-              message: error.response
-                ? error.response.data.status_message ||
-                  error.response.data.errors[0]
-                : error.message,
-              title: error.response
-                ? error.response.status + '!'
-                : defaultTitle,
-            },
+            error: generateError(),
           },
           'failureData'
         )
