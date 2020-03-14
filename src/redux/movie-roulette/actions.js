@@ -21,6 +21,10 @@ const fetchRouleteMovies = pagination => ({
       ROULETTE_MOVIES_SUCCESS,
       ROULETTE_MOVIES_FAILURE,
     ],
+    failureFeedback: {
+      title: 'Unable to load movies!',
+      message: 'Try to reload the page!',
+    },
     requestData: {
       loadingMessage: 'Fetching movies...',
     },

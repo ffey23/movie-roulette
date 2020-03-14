@@ -5,26 +5,12 @@ import MovieList from '@/components/MovieList/MovieList';
 import Loader from '@/components/Loader/Loader';
 import { loadRouletteMovies } from '@/redux/movie-roulette/actions';
 import { fetchGenres } from '@/redux/fixtures/actions';
-import { dismissError } from '@/redux/error/actions';
 import Swal from 'sweetalert2';
 import './RouletteMovieList.scss';
 import BottomButtons from './BottomButtons';
 import styles from './RouletteMovieList.module.scss';
 
 class RouletteMovieList extends Component {
-  renderError() {
-    const { error, dismissError } = this.props;
-    if (error) {
-      Swal.fire({
-        icon: 'error',
-        title: error.title,
-        text: error.message,
-      }).then(result => {
-        dismissError();
-      });
-    }
-  }
-
   renderLoader() {
     const { loadingMessage } = this.props;
     if (!loadingMessage) return null;
@@ -45,6 +31,7 @@ class RouletteMovieList extends Component {
     // moviesAll.lenght <= moviesShown.lenght tell us that there is no more movies to load -reducer logic
     const showLoadButton =
       !loadingMessage && moviesAll.length > moviesShown.length;
+
     return (
       <BottomButtons
         showLoadButton={showLoadButton}
@@ -57,7 +44,6 @@ class RouletteMovieList extends Component {
 
   render() {
     const { moviesShown } = this.props;
-    this.renderError();
 
     return (
       <div>
@@ -80,43 +66,24 @@ class RouletteMovieList extends Component {
   }
 
   fetchGenres() {
-    const { genres, fetchGenres, dismissError } = this.props;
+    const { genres, fetchGenres } = this.props;
 
     // Prevents fetching genres if already loaded
     if (genres.length) return;
 
-    fetchGenres().then(result => {
-      dismissError();
-      if (result.error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text:
-            'Everything works but roll feature is missing! Try to reload the page!',
-        });
-      }
-    });
+    fetchGenres();
   }
 
   fetchMovies(genreId) {
     const { loadRouletteMovies } = this.props;
 
-    loadRouletteMovies(genreId)
-      .then(() => {
-        // If genre is changed scroll to top
-        if (genreId) {
-          window.scroll({
-            top: 0,
-          });
-        }
-      })
-      .catch(err => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Something went wrong!',
-          text: 'Unable to load movies!',
+    loadRouletteMovies(genreId).then(result => {
+      if (!result.error && genreId) {
+        window.scroll({
+          top: 0,
         });
-      });
+      }
+    });
   }
 
   loadMoviesHandler() {
@@ -172,8 +139,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     loadRouletteMovies: genre => dispatch(loadRouletteMovies(genre)),
-    fetchGenres: () => dispatch(fetchGenres()),
-    dismissError: () => dispatch(dismissError()),
+    fetchGenres: error => dispatch(fetchGenres(error)),
   };
 };
 
@@ -184,7 +150,6 @@ RouletteMovieList.propTypes = {
   genres: PropTypes.array,
   loadRouletteMovies: PropTypes.func,
   fetchGenres: PropTypes.func,
-  dismissErrorMessage: PropTypes.func,
   currentGenre: PropTypes.number,
   error: PropTypes.object,
 };

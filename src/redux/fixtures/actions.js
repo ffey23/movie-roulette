@@ -9,6 +9,11 @@ const fetchGenres = () => ({
   [API_MIDDLEWARE]: {
     api: [api.fixtures.get_genres],
     types: [GENRES_REQUEST, GENRES_SUCCESS, GENRES_FAILURE],
+    failureFeedback: {
+      title: 'Error',
+      message:
+        'Everything works but roll feature is missing! Try to reload the page!',
+    },
   },
 });
 
