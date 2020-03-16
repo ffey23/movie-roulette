@@ -8,7 +8,10 @@ import { popupOverlay } from '@/styled/mixins';
 // Needed for conditionally show component
 class MainLoader extends Component {
   render() {
-    const { message } = this.props;
+    // msg is real prop and msgState is from the state
+    const { msg, msgState } = this.props;
+    const message = msg || msgState;
+
     if (message == null) return null;
 
     const Wrapper = styled.div`
@@ -25,13 +28,13 @@ class MainLoader extends Component {
 }
 
 MainLoader.propTypes = {
-  message: PropTypes.string,
-  show: PropTypes.bool,
+  msg: PropTypes.string,
+  msgState: PropTypes.string,
 };
 
 const mapStateToProps = state => {
   return {
-    message: state.loader,
+    msgState: state.loader,
   };
 };
 
