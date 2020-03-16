@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from '@/pages/Home/Home';
-import MovieDetails from '@/pages/MovieDetails/MovieDetails';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import styled from 'styled-components';
 import { contentContainer } from './styled/mixins';
 import { fromLg } from '@/styled/mixins';
 import { colors } from '@/styled/variables';
+const MovieDetails = lazy(() => import('@/pages/MovieDetails/MovieDetails'));
+const Home = lazy(() => import('@/pages/Home/Home'));
 
 function Main() {
   const Wrapper = styled.main`
@@ -20,17 +20,27 @@ function Main() {
   const Content = styled.div`
     ${contentContainer()}
   `;
+
+  const Loading = () => {
+    const Wrapper = styled.div`
+      text-align: center;
+    `;
+    return <Wrapper>Loading...</Wrapper>;
+  };
+
   return (
     <Wrapper>
       <Content>
         <Router>
-          <Switch>
-            <ProtectedRoute
-              path='/movie-details/:id'
-              component={MovieDetails}
-            />
-            <Route path='/' component={Home} />
-          </Switch>
+          <Suspense fallback={<Loading />}>
+            <Switch>
+              <ProtectedRoute
+                path='/movie-details/:id'
+                component={MovieDetails}
+              />
+              <Route path='/' component={Home} />
+            </Switch>
+          </Suspense>
         </Router>
       </Content>
     </Wrapper>
