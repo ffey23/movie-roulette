@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import RouletteMovieList from '@/containers/RouletteMovieList/RouletteMovieList';
-import Landing from '@/components/Landing/Landing';
 import { login } from '@/redux/auth/actions';
+import RouteLoading from '@/components/RouteLoading/RouteLoading';
+const RouletteMovieList = lazy(() =>
+  import('@/containers/RouletteMovieList/RouletteMovieList')
+);
+
+const Landing = lazy(() => import('@/components/Landing/Landing'));
 
 const Home = ({ location, loggedIn, login }) => {
   const [nav, setNav] = useState(null);
@@ -29,7 +33,7 @@ const Home = ({ location, loggedIn, login }) => {
   return (
     <div>
       {renderRedirect()}
-      {renderPage()}
+      <Suspense fallback={<RouteLoading />}>{renderPage()}</Suspense>
     </div>
   );
 };
