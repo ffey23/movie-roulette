@@ -21,25 +21,22 @@ const MovieDetails = ({ startLoader, finishLoader, setError }) => {
       top: 0,
     });
     startLoader('Fetching movie!');
-    api.movies
-      .get_details(id, localStorage.getItem('session_id'))
-      .then(
-        movie => {
-          setMovie(movie);
-          setMyRating(
-            movie.account_states.rated ? movie.account_states.rated.value : 0
-          );
-        },
-        err => {
-          setError('FETCH_MOVIE_DETAILS_ERROR', {
-            title: 'Something went wrong!',
-            message: 'Unable to load movie! Please reload!',
-          });
-        }
-      )
-      .finally(() => {
+    api.movies.get_details(id, localStorage.getItem('session_id')).then(
+      movie => {
         finishLoader();
-      });
+        setMovie(movie);
+        setMyRating(
+          movie.account_states.rated ? movie.account_states.rated.value : 0
+        );
+      },
+      err => {
+        finishLoader();
+        setError('FETCH_MOVIE_DETAILS_ERROR', {
+          title: 'Something went wrong!',
+          message: 'Unable to load movie! Please reload!',
+        });
+      }
+    );
   }, [id, startLoader, finishLoader, setError]);
 
   const rate = value => {
