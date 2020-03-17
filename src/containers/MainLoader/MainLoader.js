@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loader from '@/components/Loader/Loader';
 import styled from 'styled-components';
-import { popupOverlay } from '@/styled/mixins';
+import PopupOverlay from '@/styled/PopupOverlay';
 
 // Needed for conditionally show component
 class MainLoader extends Component {
@@ -14,8 +14,7 @@ class MainLoader extends Component {
 
     if (message == null) return null;
 
-    const Wrapper = styled.div`
-      ${popupOverlay}
+    const Wrapper = styled(PopupOverlay)`
       cursor: wait;
     `;
 

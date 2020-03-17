@@ -6,7 +6,7 @@ import { dismissError } from '@/redux/error/actions';
 import Button from '@/components/Button/Button';
 import { ReactComponent as Cross } from '@/assets/images/cross.svg';
 import { colors } from '@/styled/variables';
-import { popupOverlay } from '@/styled/mixins';
+import PopupOverlay from '@/styled/PopupOverlay';
 
 export class ErrorPopup extends Component {
   static propTypes = {
@@ -21,13 +21,8 @@ export class ErrorPopup extends Component {
       document.body.style.overflow = 'auto';
       return null;
     }
-
     document.body.style.overflow = 'hidden';
     const { title, message } = this.props.error;
-
-    const Wrapper = styled.div`
-      ${popupOverlay}
-    `;
 
     const Popup = styled.div`
       background-color: white;
@@ -73,7 +68,7 @@ export class ErrorPopup extends Component {
     `;
 
     return (
-      <Wrapper>
+      <PopupOverlay>
         <Popup>
           <Header></Header>
           <IconWrapper>
@@ -89,7 +84,7 @@ export class ErrorPopup extends Component {
             </ButtonStyled>
           </ButtonWrapper>
         </Popup>
-      </Wrapper>
+      </PopupOverlay>
     );
   }
 }
