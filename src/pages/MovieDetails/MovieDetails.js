@@ -11,7 +11,7 @@ import Backdrop from './Backdrop/Backdrop';
 import InfoList from '@/pages/MovieDetails/InfoList';
 import { IMAGES_BASE_URL } from '@/services/constants';
 
-const MovieDetails = ({ startLoader, finishLoader }) => {
+const MovieDetails = ({ startLoader, finishLoader, setError }) => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [myRating, setMyRating] = useState(0);
@@ -31,17 +31,16 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
           );
         },
         err => {
-          Swal.fire({
-            icon: 'error',
+          setError('FETCH_MOVIE_DETAILS_ERROR', {
             title: 'Something went wrong!',
-            text: 'Unable to load movie!',
+            message: 'Unable to load movie! Please reload!',
           });
         }
       )
       .finally(() => {
         finishLoader();
       });
-  }, [id, startLoader, finishLoader]);
+  }, [id, startLoader, finishLoader, setError]);
 
   const rate = value => {
     // Needed for later reseting to the old value on error - othervise it wouldn't rerender
@@ -61,10 +60,9 @@ const MovieDetails = ({ startLoader, finishLoader }) => {
         // Reseting to old value on error
         const oldValue = myRating;
         setMyRating(oldValue);
-        Swal.fire({
-          icon: 'error',
+        setError('RATE_MOVIE_ERROR', {
           title: 'Something went wrong!',
-          text: 'Try rate again!',
+          message: 'Try to rate again!',
         });
       }
     );
@@ -125,6 +123,7 @@ const mapDispatchToProps = dispatch => {
   return {
     startLoader: message => dispatch(startLoader(message)),
     finishLoader: () => dispatch(finishLoader()),
+    setError: (type, error) => dispatch({ type, error }),
   };
 };
 
