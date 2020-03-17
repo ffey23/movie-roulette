@@ -3,7 +3,7 @@ import AuthButton from '../AuthButton/AuthButton';
 import styled from 'styled-components';
 import { colors } from '@/styled/variables';
 import { fromLg } from '@/styled/mixins';
-import { contentContainer } from './styled/mixins';
+import ContentContainer from './styled/ContentContainer';
 
 const Header = () => {
   const Wrapper = styled.header`
@@ -15,8 +15,7 @@ const Header = () => {
     `)}
   `;
 
-  const Content = styled.div`
-    ${contentContainer()}
+  const Content = styled(ContentContainer)`
     height: 100%;
     display: flex;
     justify-content: space-between;

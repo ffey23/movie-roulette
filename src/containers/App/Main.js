@@ -2,10 +2,10 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import styled from 'styled-components';
-import { contentContainer } from './styled/mixins';
 import { fromLg } from '@/styled/mixins';
 import { colors } from '@/styled/variables';
 import RouteLoading from '@/components/RouteLoading/RouteLoading';
+import ContentContainer from './styled/ContentContainer';
 
 const MovieDetails = lazy(() => import('@/pages/MovieDetails/MovieDetails'));
 const Home = lazy(() => import('@/pages/Home/Home'));
@@ -19,13 +19,9 @@ function Main() {
     `)}
   `;
 
-  const Content = styled.div`
-    ${contentContainer()}
-  `;
-
   return (
     <Wrapper>
-      <Content>
+      <ContentContainer>
         <Router>
           <Suspense fallback={<RouteLoading />}>
             <Switch>
@@ -37,7 +33,7 @@ function Main() {
             </Switch>
           </Suspense>
         </Router>
-      </Content>
+      </ContentContainer>
     </Wrapper>
   );
 }

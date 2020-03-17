@@ -1,11 +1,10 @@
 import React from 'react';
 import { ReactComponent as MdbLogo } from '@/assets/images/movie-db-logo.svg';
-import { contentContainer } from './styled/mixins';
 import styled from 'styled-components';
+import ContentContainer from './styled/ContentContainer';
 
 function Footer() {
-  const Content = styled.div`
-    ${contentContainer()}
+  const Content = styled(ContentContainer)`
     height: 100%;
     display: flex;
     justify-content: space-between;
