@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { contentContainer } from './styled/mixins';
 import { fromLg } from '@/styled/mixins';
 import { colors } from '@/styled/variables';
+import RouteLoading from '@/components/RouteLoading/RouteLoading';
+
 const MovieDetails = lazy(() => import('@/pages/MovieDetails/MovieDetails'));
 const Home = lazy(() => import('@/pages/Home/Home'));
 
@@ -21,18 +23,11 @@ function Main() {
     ${contentContainer()}
   `;
 
-  const Loading = () => {
-    const Wrapper = styled.div`
-      text-align: center;
-    `;
-    return <Wrapper>Loading...</Wrapper>;
-  };
-
   return (
     <Wrapper>
       <Content>
         <Router>
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<RouteLoading />}>
             <Switch>
               <ProtectedRoute
                 path='/movie-details/:id'
