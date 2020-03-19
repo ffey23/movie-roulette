@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import Rating from './Rating';
 import styled from 'styled-components';
 import { colors } from '@/styled/variables';
@@ -10,20 +10,15 @@ import Image from './Image/Image';
 import Info from './Info';
 
 const MovieItem = ({ movie }) => {
-  const [navigation, setNavigation] = useState(null);
-  const navigateToMovie = params => {
-    setNavigation(true);
-  };
-
-  if (navigation)
-    return <Redirect to={`movie-details/${movie.id}`} push={true} />;
-
-  let Wrapper = styled.div`
+  let Wrapper = styled(Link)`
     // Needed for rating positioning
     position: relative;
 
     border: 2px solid ${colors.neutralDark};
     border-radius: 5px;
+
+    text-decoration: none;
+    color: ${colors.textDark};
 
     // 1) Make picture grow to the title if it has to
     ${fromMd(`
@@ -41,7 +36,7 @@ const MovieItem = ({ movie }) => {
   `;
 
   return (
-    <Wrapper onClick={navigateToMovie}>
+    <Wrapper to={`movie-details/${movie.id}`}>
       <Image movie={movie} />
       <Rating rating={movie.vote_average} />
       <Info movie={movie} />
