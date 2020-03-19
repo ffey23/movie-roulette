@@ -14,6 +14,7 @@ const colors = {
   neutral: '#D7D8DC',
   neutralDark: '#C2C2C7',
 
+  textDark: '#000000',
   textLight: '#4f5959',
 };
 export { breakpoints, colors };
