@@ -13,6 +13,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ``` 
     REACT_APP_API_KEY=YOUR_V3_API_KEY
     REACT_APP_ACCESS_TOKEN=YOUR_V4_API_READ_ACCESS_TOKEN
+    REACT_APP_HOMEPAGE=http://localhost:3000/
 ```
 7. run **npm start** and the app will automatically open in Chrome after compilation
 

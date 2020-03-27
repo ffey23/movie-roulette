@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
+    "env-cmd": "^10.1.0",
     "node-sass": "^4.13.1",
     "normalize.css": "^8.0.1",
     "react": "^16.12.0",
@@ -26,6 +27,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "build:netlify": "env-cmd -f .env.netlify craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
     "lint-check": "eslint --print-config src/App.js | eslint-config-prettier-check",
