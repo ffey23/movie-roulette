@@ -6,6 +6,7 @@ import { fromLg } from '@/styled/mixins';
 import { colors } from '@/styled/variables';
 import RouteLoading from '@/components/RouteLoading/RouteLoading';
 import ContentContainer from './styled/ContentContainer';
+import ErrorBoundary from '@/containers/ErrorBoundary/ErrorBoundary';
 
 const MovieDetails = lazy(() => import('@/pages/MovieDetails/MovieDetails'));
 const Home = lazy(() => import('@/pages/Home/Home'));
@@ -23,15 +24,17 @@ function Main() {
     <Wrapper>
       <ContentContainer>
         <Router>
-          <Suspense fallback={<RouteLoading />}>
-            <Switch>
-              <ProtectedRoute
-                path='/movie-details/:id'
-                component={MovieDetails}
-              />
-              <Route path='/' component={Home} />
-            </Switch>
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<RouteLoading />}>
+              <Switch>
+                <ProtectedRoute
+                  path='/movie-details/:id'
+                  component={MovieDetails}
+                />
+                <Route path='/' component={Home} />
+              </Switch>
+            </Suspense>
+          </ErrorBoundary>
         </Router>
       </ContentContainer>
     </Wrapper>
